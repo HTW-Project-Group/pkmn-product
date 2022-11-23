@@ -1,7 +1,7 @@
-package de.htwberlin.entity.factory;
+package de.htwberlin.product.entity.factory;
 
 import com.github.javafaker.Faker;
-import de.htwberlin.entity.ProductEntity;
+import de.htwberlin.product.entity.ProductEntity;
 import java.util.Locale;
 import java.util.UUID;
 import lombok.AccessLevel;
@@ -15,7 +15,7 @@ public class ProductFactory {
   public static ProductEntity.ProductEntityBuilder simpleProduct() {
     return ProductEntity.builder()
         .id(UUID.randomUUID())
-        .name(faker.company().name())
+        .name(faker.pokemon().name())
         .price(faker.number().randomDouble(2, 100, 1000));
   }
 }

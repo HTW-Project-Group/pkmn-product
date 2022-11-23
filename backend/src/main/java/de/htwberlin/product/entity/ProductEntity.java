@@ -1,4 +1,4 @@
-package de.htwberlin.entity;
+package de.htwberlin.product.entity;
 
 import java.util.UUID;
 import javax.persistence.Entity;

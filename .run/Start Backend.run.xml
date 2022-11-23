@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Start Backend" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="ACTIVE_PROFILES" />
-    <module name="backend" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="de.htwberlin.BackendApplication" />
+    <module name="pkmn-product-backend" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="de.htwberlin.product.BackendApplication" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="de.htwberlin.backend.*" />

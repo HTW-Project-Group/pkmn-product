@@ -1,4 +1,4 @@
-package de.htwberlin.backend;
+package de.htwberlin.product;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
