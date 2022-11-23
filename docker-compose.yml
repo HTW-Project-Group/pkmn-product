@@ -1,0 +1,47 @@
+version: '3.5'
+
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+  postgres:
+    image: postgres:14.5-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=AWTAP0NOm0v6KNACjIf5E7UK
+      - POSTGRES_DB=shop_db
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:19.0.0
+    container_name: keycloak
+    environment:
+      - DB_ADDR=postgres
+      - DB_PORT=4284
+      - DB_DATABASE=shop_db
+      - DB_SCHEMA=public
+      - DB_USER=admin
+      - DB_PASSWORD=AWTAP0NOm0v6KNACjIf5E7UK
+      - KC_HOSTNAME=localhost
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=AWTAP0NOm0v6KNACjIf5E7UK
+    command:
+      - 'start-dev'
+    ports:
+      - '4286:4286'
+    depends_on:
+      - postgres
+
+  rabbitmq:
+      image: rabbitmq:latest
+      container_name: rabbitmq
+      ports:
+        - "5672:5672"
+        - "15672:15672"

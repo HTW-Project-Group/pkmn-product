@@ -1,0 +1,15 @@
+
+# Git
+.github
+
+# IntelliJ
+.idea
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# Maven
+.mvn
