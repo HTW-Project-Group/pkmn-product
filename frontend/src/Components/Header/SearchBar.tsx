@@ -2,6 +2,15 @@ import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
+
+
+const categories = ["Fire", "Water", "Grass", "Electric"];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -46,15 +55,55 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchBar() {
+  const [
+    anchorElCategory,
+    setAnchorElCategory,
+  ] = React.useState<null | HTMLElement>(null);
+
+  const handleOpenCategoryMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElCategory(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElCategory(null);
+  };
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search…"
-        inputProps={{ "aria-label": "search" }}
-      />
-    </Search>
+    <Box sx={{ display: "flex" }}>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search…"
+          inputProps={{ "aria-label": "search" }}
+        />
+      </Search>
+      <Box>
+        <IconButton onClick={handleOpenCategoryMenu} color="inherit">
+          <MenuIcon />
+        </IconButton>
+        <Menu
+          sx={{ mt: "45px" }}
+          id="menu-appbar"
+          anchorEl={anchorElCategory}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={Boolean(anchorElCategory)}
+          onClose={handleCloseUserMenu}
+        >
+          {categories.map((category) => (
+            <MenuItem key={category} onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">{category}</Typography>
+            </MenuItem>
+          ))}
+        </Menu>
+      </Box>
+    </Box>
   );
 }
