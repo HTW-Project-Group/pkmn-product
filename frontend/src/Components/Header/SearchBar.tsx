@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-
+import Tooltip from "@mui/material/Tooltip";
 
 const categories = ["Fire", "Water", "Grass", "Electric"];
 
@@ -78,9 +78,11 @@ export default function SearchBar() {
         />
       </Search>
       <Box>
-        <IconButton onClick={handleOpenCategoryMenu} color="inherit">
-          <MenuIcon />
-        </IconButton>
+        <Tooltip title={"Categories"}>
+          <IconButton onClick={handleOpenCategoryMenu} color="inherit">
+            <MenuIcon />
+          </IconButton>
+        </Tooltip>
         <Menu
           sx={{ mt: "45px" }}
           id="menu-appbar"

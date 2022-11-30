@@ -1,11 +1,53 @@
 import * as React from "react";
+import Box from "@mui/material/Box";
 
 export default function ContentBanner() {
   return (
-    <div id="wallpaperdiv">
-      <div id="wallpaper"></div>
-      <div id="logo"></div>
+    <Box
+      id="wallpaperdiv"
+      sx={{ display: "flex", justifyContent: "center", alignItems: "top" }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "top",
+          marginTop: "6%",
+          top: "0%",
+        }}
+      >
+        <Box
+          id="logo"
+          sx={{
+            zIndex: "1",
+            position: "absolute",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src="/International_Pokémon_logo.svg (1).png"
+            width="20%"
+            height="auto"
+          />
+        </Box>
+        <Box
+          id="wallpaper"
+          sx={{
+            position: "absolute",
+            zIndex: "0",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "4%",
+          }}
+        >
+          <img src="/wp3228872.jpg" width="75%" height="auto" />
+        </Box>
+      </Box>
+
       <div id="infobox"></div>
-    </div>
+    </Box>
   );
 }

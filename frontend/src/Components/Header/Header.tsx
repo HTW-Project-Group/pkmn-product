@@ -8,7 +8,7 @@ import NavActions from "./NavActions";
 
 export default function DrawerAppBar() {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box id="BlueBar" sx={{ display: "flex" }}>
       <AppBar component="nav">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography
