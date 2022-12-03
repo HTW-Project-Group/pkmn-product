@@ -39,7 +39,7 @@ export default function RecommendedProducts() {
   }, []);
 
   return (
-    <Box marginLeft="3%" marginRight="3%" marginTop="25%">
+    <Box marginLeft="3%" marginRight="3%" marginTop="40%">
       <Box sx={{ backgroundColor: "#1976D2", borderRadius: 2 }}>
         <Typography
           marginBottom="5%"
