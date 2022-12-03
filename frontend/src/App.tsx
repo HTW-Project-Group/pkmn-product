@@ -4,8 +4,6 @@ import Header from "./Components/Header/Header";
 import ContentBanner from "./Components/ContentBanner";
 import RecommendedProducts from "./Components/RecommendedProducts";
 
-
-
 export default function App() {
   return (
     <div>

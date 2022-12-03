@@ -1,8 +1,8 @@
 package de.htwberlin.product;
 
 //
-//@EnableWebSecurity
-//public class SecurityConfig {
+// @EnableWebSecurity
+// public class SecurityConfig {
 
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -20,4 +20,4 @@ package de.htwberlin.product;
 //        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
 //        return urlBasedCorsConfigurationSource;
 //    }
-//}
+// }
