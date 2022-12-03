@@ -14,6 +14,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "http://localhost:3000")
+
 public class ProductController {
 
   private ProductService productService;

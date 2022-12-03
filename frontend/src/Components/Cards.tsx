@@ -1,8 +1,8 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
+
 import Card from '@mui/material/Card';
-import ButtonBase from '@mui/material/ButtonBase';
-import {CardActionArea, CardContent, CardMedia} from '@mui/material';
+
+import {Box, CardActionArea, CardContent, CardMedia} from '@mui/material';
 import Typography from "@mui/material/Typography";
 
 
@@ -17,15 +17,25 @@ type cardprops = {
 export default function Cards({name, image, id , price}: cardprops) {
 
     return (
-        <Card className={"cardData"} sx={{maxWidth: 300}}>
-            <CardActionArea>
+        /*<Card /!*sx={{ zIndex: "0",  borderRadius: 0, boxShadow: '0 8px 16px 0 #BDC9D7'}}*!/ className={"cardData"}>*/
+            <CardActionArea sx={{
+                        borderRadius: 0,
+                        transition: '0.2s',
+                        '&:hover': {
+                            transform: 'scale(1.03)',
+                        }, padding: 2, zIndex: "0",  boxShadow: '0 8px 16px 0 #BDC9D7'}} >
                 <CardMedia
                     component="img"
-                    height="500"
+                    height="auto"
+                    width="auto"
+
                     image={image}/>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {name}/ {price}
+                        {name}
+                    </Typography>
+                    <Typography gutterBottom variant="h6" component="div">
+                        {price}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         Hier steht die Beschreibung
@@ -34,7 +44,7 @@ export default function Cards({name, image, id , price}: cardprops) {
 
                 </CardContent>
             </CardActionArea>
-        </Card>
+       /* </Card>*/
     );
 
 }

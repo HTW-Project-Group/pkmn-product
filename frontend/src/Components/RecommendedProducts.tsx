@@ -1,8 +1,9 @@
 import * as React from "react";
 import Cards from "./Cards"
 import Box from "@mui/material/Box";
+
+import {useEffect, useState} from "react";
 import Typography from "@mui/material/Typography";
-import {SetStateAction, useEffect, useState} from "react";
 
 
 // auslagern
@@ -44,14 +45,33 @@ export default function RecommendedProducts() {
 
 
     return (
+        <Box marginLeft="3%" marginRight="3%" marginTop="40%">
+            <Box sx={{backgroundColor: "#1976D2", borderRadius: 2}}>
+                <Typography marginBottom="5%" variant="h5" color="white" textAlign="center">
+                    Recommended Products
+                </Typography>
+            </Box>
+            <Box marginLeft="5%" marginRight="5%"  maxWidth="90%">
 
-        <Box>
 
-            {products.map( (item: Card) => (
-                <Cards key={item.id} name={item.name} id={item.id} price={item.price}
-                       image="https://assets.pokemon.com/assets/cms2-de-de/img/cards/web/XY3/XY3_DE_81.png"/>
+                <Box display="flex" flexWrap="wrap" gap="5%"
+                     maxHeight="600px" flexDirection="row"
+                     justifyContent="space-evenly" rowGap="10%"
+                >
 
-            ))}
+                    {products.map((item: Card) => (
+                        <Box marginBottom="5%" flex="1 0 14%" key={item.id} maxWidth="16%"
+                             maxHeight="auto">
+                            <Cards key={item.id} name={item.name} id={item.id} price={item.price}
+                                   image="https://assets.pokemon.com/assets/cms2-de-de/img/cards/web/XY3/XY3_DE_81.png"
+                            />
+                        </Box>
+                    ))}
+                </Box>
+                <Box marginTop="40%" height="20%" width="100%">
+                </Box>
+            </Box>
         </Box>
+
     );
 }
