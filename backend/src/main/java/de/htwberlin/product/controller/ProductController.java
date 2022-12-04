@@ -5,17 +5,17 @@ import de.htwberlin.product.exception.ProductNotFoundException;
 import de.htwberlin.product.service.ProductService;
 import java.util.List;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
-  private ProductService productService;
+  private final ProductService productService;
 
   @GetMapping
   public ResponseEntity<List<ProductDto>> getProducts() {

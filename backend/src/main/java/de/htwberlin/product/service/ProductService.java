@@ -8,19 +8,21 @@ import de.htwberlin.product.model.repository.ProductRepository;
 import java.util.List;
 import java.util.UUID;
 import javax.transaction.Transactional;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Service
 @Transactional
-@AllArgsConstructor
+@Validated
+@RequiredArgsConstructor
 public class ProductService {
 
-  private ProductRepository productRepository;
-  private ProductMapper productMapper;
+  private final ProductRepository productRepository;
+  private final ProductMapper productMapper;
 
   public List<ProductDto> findAllProducts() {
-    return productRepository.findAll().stream().map(entity -> productMapper.toDto(entity)).toList();
+    return productRepository.findAll().stream().map(productMapper::toDto).toList();
   }
 
   public ProductDto findProductById(UUID id) throws ProductNotFoundException {

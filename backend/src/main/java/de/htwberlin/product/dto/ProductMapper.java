@@ -2,9 +2,11 @@ package de.htwberlin.product.dto;
 
 import de.htwberlin.product.model.ProductEntity;
 import java.util.List;
+
+import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface ProductMapper {
 
   ProductDto toDto(ProductEntity entity);
