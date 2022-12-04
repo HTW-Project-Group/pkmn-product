@@ -1,7 +1,7 @@
-package de.htwberlin.product.entity.factory;
+package de.htwberlin.product.model.factory;
 
 import com.github.javafaker.Faker;
-import de.htwberlin.product.entity.ProductEntity;
+import de.htwberlin.product.model.ProductEntity;
 import java.util.Locale;
 import java.util.UUID;
 import lombok.AccessLevel;

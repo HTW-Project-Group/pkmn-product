@@ -1,7 +1,7 @@
 package de.htwberlin.product.controller;
 
-import de.htwberlin.product.entity.ProductEntity;
 import de.htwberlin.product.exception.ProductNotFoundException;
+import de.htwberlin.product.model.dto.ProductDto;
 import de.htwberlin.product.service.ProductService;
 import java.util.List;
 import java.util.UUID;
@@ -18,12 +18,12 @@ public class ProductController {
   private ProductService productService;
 
   @GetMapping
-  public ResponseEntity<List<ProductEntity>> getProducts() {
+  public ResponseEntity<List<ProductDto>> getProducts() {
     return new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<ProductEntity> getProductById(@PathVariable("id") UUID id)
+  public ResponseEntity<ProductDto> getProductById(@PathVariable("id") UUID id)
       throws ProductNotFoundException {
     return new ResponseEntity<>(productService.findProductById(id), HttpStatus.OK);
   }

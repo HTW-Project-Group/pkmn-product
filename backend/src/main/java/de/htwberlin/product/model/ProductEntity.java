@@ -1,8 +1,8 @@
-package de.htwberlin.product.entity;
+package de.htwberlin.product.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.*;
-
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -13,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 @AllArgsConstructor
 @Entity
 @Table(name = "product")
-public class ProductEntity {
+public class ProductEntity implements Serializable {
 
   @Id
   @GeneratedValue(generator = "UUID")

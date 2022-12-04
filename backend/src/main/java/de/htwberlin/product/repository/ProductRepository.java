@@ -1,26 +1,15 @@
 package de.htwberlin.product.repository;
 
-import static de.htwberlin.product.repository.DummyProducts.PRODUCT_LIST;
-import static java.util.Optional.ofNullable;
-
-import de.htwberlin.product.entity.ProductEntity;
-import java.util.List;
+import de.htwberlin.product.model.ProductEntity;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-// later: replace with real Repository connected to DB
+@Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {
 
-  default List<ProductEntity> findAllProducts() {
-    return PRODUCT_LIST;
-  }
+  Optional<ProductEntity> findProductById(UUID id);
 
-  default Optional<ProductEntity> findProductById(UUID id) {
-    return ofNullable(
-        PRODUCT_LIST.stream()
-            .collect(Collectors.toMap(ProductEntity::getId, entity -> entity))
-            .get(id));
-  }
+  Optional<ProductEntity> findProductByPokemonId(String pokemondId);
 }
