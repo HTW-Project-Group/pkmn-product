@@ -177,6 +177,7 @@
                     <url>jdbc:postgresql://localhost:5432/shop_db</url>
                     <user>admin</user>
                     <password>AWTAP0NOm0v6KNACjIf5E7UK</password>
+                    <cleanDisabled>false</cleanDisabled>
                 </configuration>
             </plugin>
             <plugin>

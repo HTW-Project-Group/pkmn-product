@@ -2,7 +2,6 @@ package de.htwberlin.product.dto;
 
 import de.htwberlin.product.model.ProductEntity;
 import java.util.List;
-
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 

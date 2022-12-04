@@ -49,7 +49,7 @@ class ProductServiceTest {
 
     when(productRepository.findProductById(targetId)).thenReturn(Optional.of(target));
 
-    final ProductDto result = productService.findProductById(targetId);
+    final ProductDto result = productService.findProductById(targetId).get();
     assertThat(result.getId()).isEqualTo(targetId);
     assertThat(result.getName()).isEqualTo("Test");
     assertThat(result.getPrice()).isEqualTo(199);

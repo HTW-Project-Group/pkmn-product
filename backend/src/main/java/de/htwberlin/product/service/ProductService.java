@@ -2,10 +2,9 @@ package de.htwberlin.product.service;
 
 import de.htwberlin.product.dto.ProductDto;
 import de.htwberlin.product.dto.ProductMapper;
-import de.htwberlin.product.exception.ProductNotFoundException;
-import de.htwberlin.product.model.ProductEntity;
 import de.htwberlin.product.model.repository.ProductRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +24,17 @@ public class ProductService {
     return productRepository.findAll().stream().map(productMapper::toDto).toList();
   }
 
-  public ProductDto findProductById(UUID id) throws ProductNotFoundException {
-    final ProductEntity entity =
-        productRepository.findProductById(id).orElseThrow(ProductNotFoundException::new);
-    return productMapper.toDto(entity);
+  public Optional<ProductDto> findProductById(UUID id) {
+    final var entity = productRepository.findProductById(id);
+    return entity.map(productMapper::toDto);
+  }
+
+  public Optional<ProductDto> findProductByPokemonId(String id) {
+    final var entity = productRepository.findProductByPokemonId(id);
+    return entity.map(productMapper::toDto);
+  }
+
+  public void createProduct(ProductDto dto) {
+    productRepository.save(productMapper.toEntity(dto));
   }
 }

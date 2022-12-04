@@ -25,6 +25,16 @@ public class ProductController {
   @GetMapping("/{id}")
   public ResponseEntity<ProductDto> getProductById(@PathVariable("id") UUID id)
       throws ProductNotFoundException {
-    return new ResponseEntity<>(productService.findProductById(id), HttpStatus.OK);
+    return new ResponseEntity<>(
+        productService.findProductById(id).orElseThrow(ProductNotFoundException::new),
+        HttpStatus.OK);
+  }
+
+  @GetMapping("/pkmn/{pokemonId}")
+  public ResponseEntity<ProductDto> getProductById(@PathVariable("pokemonId") String pokemonId)
+      throws ProductNotFoundException {
+    return new ResponseEntity<>(
+        productService.findProductByPokemonId(pokemonId).orElseThrow(ProductNotFoundException::new),
+        HttpStatus.OK);
   }
 }

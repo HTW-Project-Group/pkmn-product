@@ -11,5 +11,5 @@ public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {
 
   Optional<ProductEntity> findProductById(UUID id);
 
-  Optional<ProductEntity> findProductByPokemonId(String pokemondId);
+  Optional<ProductEntity> findProductByPokemonId(String pokemonId);
 }
