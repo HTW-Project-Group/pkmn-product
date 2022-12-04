@@ -1,20 +1,38 @@
 package de.htwberlin.product.entity;
 
 import java.util.UUID;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Getter
 @Setter
 @Builder
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "product")
 public class ProductEntity {
-  @Id UUID id;
 
+  @Id
+  @GeneratedValue(generator = "UUID")
+  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+  @Column(name = "id", nullable = false, updatable = false)
+  UUID id;
+
+  @Column(name = "name", unique = true, nullable = false, updatable = false)
   String name;
 
+  @Column(name = "price")
   double price;
+
+  @Column(name = "description")
+  String description;
+
+  @Column(name = "condition")
+  int condition;
+
+  @Column(name = "pokemon_id", unique = true, nullable = false, updatable = false)
+  String pokemonId;
 }
