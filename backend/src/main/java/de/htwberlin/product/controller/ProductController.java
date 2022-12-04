@@ -1,7 +1,7 @@
 package de.htwberlin.product.controller;
 
+import de.htwberlin.product.dto.ProductDto;
 import de.htwberlin.product.exception.ProductNotFoundException;
-import de.htwberlin.product.model.dto.ProductDto;
 import de.htwberlin.product.service.ProductService;
 import java.util.List;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package de.htwberlin.product.repository;
+package de.htwberlin.product.model.repository;
 
 import de.htwberlin.product.model.ProductEntity;
 import java.util.Optional;

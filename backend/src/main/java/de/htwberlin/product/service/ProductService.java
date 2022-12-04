@@ -1,10 +1,10 @@
 package de.htwberlin.product.service;
 
+import de.htwberlin.product.dto.ProductDto;
+import de.htwberlin.product.dto.ProductMapper;
 import de.htwberlin.product.exception.ProductNotFoundException;
 import de.htwberlin.product.model.ProductEntity;
-import de.htwberlin.product.model.dto.ProductDto;
-import de.htwberlin.product.model.dto.ProductMapper;
-import de.htwberlin.product.repository.ProductRepository;
+import de.htwberlin.product.model.repository.ProductRepository;
 import java.util.List;
 import java.util.UUID;
 import javax.transaction.Transactional;

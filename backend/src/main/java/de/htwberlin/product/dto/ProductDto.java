@@ -1,4 +1,4 @@
-package de.htwberlin.product.model.dto;
+package de.htwberlin.product.dto;
 
 import java.util.UUID;
 import lombok.Builder;

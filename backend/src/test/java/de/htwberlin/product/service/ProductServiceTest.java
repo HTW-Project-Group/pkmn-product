@@ -3,12 +3,13 @@ package de.htwberlin.product.service;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import de.htwberlin.product.dto.ProductDto;
+import de.htwberlin.product.dto.ProductFactory;
+import de.htwberlin.product.dto.ProductMapper;
+import de.htwberlin.product.dto.ProductMapperImpl;
 import de.htwberlin.product.exception.ProductNotFoundException;
 import de.htwberlin.product.model.ProductEntity;
-import de.htwberlin.product.model.dto.ProductDto;
-import de.htwberlin.product.model.dto.ProductMapper;
-import de.htwberlin.product.model.factory.ProductFactory;
-import de.htwberlin.product.repository.ProductRepository;
+import de.htwberlin.product.model.repository.ProductRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,20 +21,22 @@ class ProductServiceTest {
 
   private ProductService productService;
   private ProductRepository productRepository;
+  private ProductMapper productMapper;
 
   @BeforeEach
   void setUp() {
     productRepository = mock(ProductRepository.class);
-    ProductMapper productMapper = mock(ProductMapper.class);
+    productMapper = new ProductMapperImpl();
     productService = new ProductService(productRepository, productMapper);
   }
 
   @Test
   @SneakyThrows
   void shouldReturnProducts() {
-    final List<ProductEntity> productList = List.of(ProductFactory.simpleProduct().build());
-    when(productRepository.findAll()).thenReturn(productList);
-    assertThat(productService.findAllProducts()).isEqualTo(productList);
+    final List<ProductDto> productDtoList = List.of(ProductFactory.simpleProduct().build());
+    final List<ProductEntity> productEntityList = productMapper.toEntities(productDtoList);
+    when(productRepository.findAll()).thenReturn(productEntityList);
+    assertThat(productService.findAllProducts()).isEqualTo(productDtoList);
   }
 
   @Test
@@ -41,7 +44,8 @@ class ProductServiceTest {
   void shouldReturnProductById() {
     final UUID targetId = UUID.fromString("00000000-0000-0000-0000-000000000000");
     final ProductEntity target =
-        ProductFactory.simpleProduct().id(targetId).name("Test").price(199).build();
+        productMapper.toEntity(
+            ProductFactory.simpleProduct().id(targetId).name("Test").price(199).build());
 
     when(productRepository.findProductById(targetId)).thenReturn(Optional.of(target));
 
