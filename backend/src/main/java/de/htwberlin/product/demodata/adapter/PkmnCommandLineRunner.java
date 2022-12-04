@@ -27,7 +27,9 @@ public class PkmnCommandLineRunner implements CommandLineRunner {
   public void run(String... args) {
     log.info("Starting PkmnCommandLineRunner");
     if (numberOfTestData == 0) {
+      log.info("Number of Test Data Records is set to zero");
       log.info("No Testdata will be created");
+      return;
     }
     demodataService.generateTestData(numberOfTestData);
   }
