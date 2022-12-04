@@ -1,4 +1,4 @@
-package de.htwberlin.product.demodata.adapter;
+package de.htwberlin.product.adapter;
 
 import de.htwberlin.product.demodata.DemodataService;
 import lombok.Setter;

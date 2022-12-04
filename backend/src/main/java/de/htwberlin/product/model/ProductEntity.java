@@ -21,7 +21,7 @@ public class ProductEntity implements Serializable {
   @Column(name = "id", nullable = false, updatable = false)
   UUID id;
 
-  @Column(name = "name", unique = true, nullable = false, updatable = false)
+  @Column(name = "name")
   String name;
 
   @Column(name = "price")

@@ -23,7 +23,13 @@ public class DemodataService {
       var product = ProductFactory.simpleProduct().build();
       if (productService.findProductByPokemonId(product.getPokemonId()).isEmpty()) {
         productService.createProduct(product);
-        log.info(genIdx(c, count) + "Inserted " + product.getName() + " into ProductRepository.");
+        log.info(
+            genIdx(c, count)
+                + "Inserted "
+                + product.getName()
+                + " ("
+                + product.getPokemonId()
+                + ") into ProductRepository.");
       } else {
         log.info(
             genIdx(c, count)
