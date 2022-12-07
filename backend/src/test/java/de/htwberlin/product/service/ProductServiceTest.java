@@ -1,16 +1,15 @@
 package de.htwberlin.product.service;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-import de.htwberlin.product.entity.ProductEntity;
-import de.htwberlin.product.entity.factory.ProductFactory;
-import de.htwberlin.product.exception.ProductNotFoundException;
-import de.htwberlin.product.repository.ProductRepository;
-import java.util.List;
-import java.util.Optional;
+import de.htwberlin.product.dto.ProductDto;
+import de.htwberlin.product.dto.ProductFactory;
+import de.htwberlin.product.dto.ProductMapper;
+import de.htwberlin.product.dto.ProductMapperImpl;
+import de.htwberlin.product.model.ProductEntity;
+import de.htwberlin.product.model.repository.ProductInMemoryRepository;
+import de.htwberlin.product.model.repository.ProductRepository;
 import java.util.UUID;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,41 +17,52 @@ class ProductServiceTest {
 
   private ProductService productService;
   private ProductRepository productRepository;
+  private ProductMapper productMapper;
 
   @BeforeEach
   void setUp() {
-    productRepository = mock(ProductRepository.class);
-    productService = new ProductService(productRepository);
+    productRepository = new ProductInMemoryRepository();
+    productMapper = new ProductMapperImpl();
+    productService = new ProductService(productRepository, productMapper);
   }
 
   @Test
-  @SneakyThrows
-  void shouldReturnProducts() {
-    final List<ProductEntity> productList = List.of(ProductFactory.simpleProduct().build());
-    when(productRepository.findAllProducts()).thenReturn(productList);
-    assertThat(productService.findAllProducts()).isEqualTo(productList);
-  }
-
-  @Test
-  @SneakyThrows
   void shouldReturnProductById() {
+    // given
     final UUID targetId = UUID.fromString("00000000-0000-0000-0000-000000000000");
-    final ProductEntity target =
+    final ProductDto targetDto =
         ProductFactory.simpleProduct().id(targetId).name("Test").price(199).build();
+    final ProductEntity targetEntity = productMapper.toEntity(targetDto);
+    productRepository.save(targetEntity);
 
-    when(productRepository.findProductById(targetId)).thenReturn(Optional.of(target));
+    // when
+    final var result = productService.findProductById(targetId);
 
-    final ProductEntity result = productService.findProductById(targetId);
-    assertThat(result.getId()).isEqualTo(targetId);
-    assertThat(result.getName()).isEqualTo("Test");
-    assertThat(result.getPrice()).isEqualTo(199);
+    // then
+    assertThat(result).isPresent();
+    var product = result.get();
+    assertThat(product.getId()).isEqualTo(targetId);
+    assertThat(product.getName()).isEqualTo("Test");
+    assertThat(product.getPrice()).isEqualTo(199);
   }
 
   @Test
-  @SneakyThrows
-  void shouldThrowExceptionWhenNoProductWasFoundById() {
-    when(productRepository.findProductById(any())).thenReturn(Optional.empty());
-    assertThatThrownBy(() -> productService.findProductById(any()))
-        .isInstanceOf(ProductNotFoundException.class);
+  void shouldReturnProductByPokemondId() {
+    // given
+    final String targetPokemonId = "test-pkmn";
+    final ProductDto targetDto =
+        ProductFactory.simpleProduct().pokemonId(targetPokemonId).name("Test").price(199).build();
+    final ProductEntity targetEntity = productMapper.toEntity(targetDto);
+    productRepository.save(targetEntity);
+
+    // when
+    final var result = productService.findProductByPokemonId(targetPokemonId);
+
+    // then
+    assertThat(result).isPresent();
+    var product = result.get();
+    assertThat(product.getPokemonId()).isEqualTo(targetPokemonId);
+    assertThat(product.getName()).isEqualTo("Test");
+    assertThat(product.getPrice()).isEqualTo(199);
   }
 }

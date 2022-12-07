@@ -1,24 +1,40 @@
 package de.htwberlin.product.service;
 
-import de.htwberlin.product.entity.ProductEntity;
-import de.htwberlin.product.exception.ProductNotFoundException;
-import de.htwberlin.product.repository.ProductRepository;
+import de.htwberlin.product.dto.ProductDto;
+import de.htwberlin.product.dto.ProductMapper;
+import de.htwberlin.product.model.repository.ProductRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Service
-@AllArgsConstructor
+@Transactional
+@Validated
+@RequiredArgsConstructor
 public class ProductService {
 
-  private ProductRepository productRepository;
+  private final ProductRepository productRepository;
+  private final ProductMapper productMapper;
 
-  public List<ProductEntity> findAllProducts() {
-    return productRepository.findAllProducts();
+  public List<ProductDto> findAllProducts() {
+    return productRepository.findAll().stream().map(productMapper::toDto).toList();
   }
 
-  public ProductEntity findProductById(UUID id) throws ProductNotFoundException {
-    return productRepository.findProductById(id).orElseThrow(ProductNotFoundException::new);
+  public Optional<ProductDto> findProductById(UUID id) {
+    final var entity = productRepository.findProductById(id);
+    return entity.map(productMapper::toDto);
+  }
+
+  public Optional<ProductDto> findProductByPokemonId(String id) {
+    final var entity = productRepository.findProductByPokemonId(id);
+    return entity.map(productMapper::toDto);
+  }
+
+  public void createProduct(ProductDto dto) {
+    productRepository.save(productMapper.toEntity(dto));
   }
 }
