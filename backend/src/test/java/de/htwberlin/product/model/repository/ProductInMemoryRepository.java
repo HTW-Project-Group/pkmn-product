@@ -4,7 +4,7 @@ import de.htwberlin.product.model.ProductEntity;
 import java.util.*;
 
 public class ProductInMemoryRepository extends BaseInMemoryRepository<ProductEntity, UUID>
-    implements ProductRepository {
+    implements IProductRepository {
 
   private final Map<UUID, ProductEntity> entities = new HashMap<>();
 

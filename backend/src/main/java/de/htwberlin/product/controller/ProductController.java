@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/v1/products")
 public class ProductController {
 
   private final ProductService productService;
@@ -36,5 +36,15 @@ public class ProductController {
     return new ResponseEntity<>(
         productService.findProductByPokemonId(pokemonId).orElseThrow(ProductNotFoundException::new),
         HttpStatus.OK);
+  }
+
+  @PostMapping("/new")
+  public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+    return new ResponseEntity<>(productService.createProduct(productDto), HttpStatus.CREATED);
+  }
+
+  @PutMapping("/{id}/edit")
+  public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) {
+    return new ResponseEntity<>(productService.updateProduct(productDto), HttpStatus.OK);
   }
 }

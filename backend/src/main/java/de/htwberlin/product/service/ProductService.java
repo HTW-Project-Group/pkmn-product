@@ -1,8 +1,8 @@
 package de.htwberlin.product.service;
 
+import de.htwberlin.product.dto.IProductMapper;
 import de.htwberlin.product.dto.ProductDto;
-import de.htwberlin.product.dto.ProductMapper;
-import de.htwberlin.product.model.repository.ProductRepository;
+import de.htwberlin.product.model.repository.IProductRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,26 +15,37 @@ import org.springframework.validation.annotation.Validated;
 @Transactional
 @Validated
 @RequiredArgsConstructor
-public class ProductService {
+public class ProductService implements IProductService {
 
-  private final ProductRepository productRepository;
-  private final ProductMapper productMapper;
+  private final IProductRepository productRepository;
+  private final IProductMapper productMapper;
 
+  @Override
   public List<ProductDto> findAllProducts() {
     return productRepository.findAll().stream().map(productMapper::toDto).toList();
   }
 
+  @Override
   public Optional<ProductDto> findProductById(UUID id) {
     final var entity = productRepository.findProductById(id);
     return entity.map(productMapper::toDto);
   }
 
+  @Override
   public Optional<ProductDto> findProductByPokemonId(String id) {
     final var entity = productRepository.findProductByPokemonId(id);
     return entity.map(productMapper::toDto);
   }
 
-  public void createProduct(ProductDto dto) {
+  @Override
+  public ProductDto createProduct(ProductDto dto) {
     productRepository.save(productMapper.toEntity(dto));
+    return dto;
+  }
+
+  @Override
+  public ProductDto updateProduct(ProductDto dto) {
+    // Update implementation if needed
+    return createProduct(dto);
   }
 }
