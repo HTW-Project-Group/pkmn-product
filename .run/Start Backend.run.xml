@@ -2,7 +2,7 @@
   <configuration default="false" name="Start Backend" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="ACTIVE_PROFILES" />
     <module name="pkmn-product-backend" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="de.htwberlin.product.BackendApplication" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="de.htwberlin.BackendApplication" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="de.htwberlin.backend.*" />

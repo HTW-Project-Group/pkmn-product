@@ -1,23 +1,16 @@
 import * as React from "react";
 import Cards from "./Cards";
 import Box from "@mui/material/Box";
-
 import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
-
-// auslagern
-interface Card {
-  id: string;
-  name: string;
-  price: number;
-}
+import Card from "./Interfaces/Card";
 
 export default function RecommendedProducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const productList = async () => {
-      const data = await fetch("http://localhost:8080/products", {
+      const data = await fetch("http://localhost:8080/v1/products", {
         method: "GET",
       });
       const jsonData = await data.json();
@@ -26,6 +19,9 @@ export default function RecommendedProducts() {
           id: data.id, // default werte beachten
           name: data.name,
           price: data.price,
+          description: data.description,
+          condition: data.condition,
+          pokemonId: data.pokemonId,
         };
         return card;
       });
