@@ -1,4 +1,4 @@
-package de.htwberlin.product;
+package de.htwberlin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
