@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Card from "./Interfaces/Card";
+import { useNavigate } from "react-router-dom";
 
 export default function RecommendedProducts() {
   const [products, setProducts] = useState([]);
@@ -33,6 +34,12 @@ export default function RecommendedProducts() {
       setProducts(result);
     });
   }, []);
+
+  const navigate = useNavigate();
+  const routeChange = (card: Card) => {
+    const path = `/details`;
+    navigate(path, { state: card });
+  };
 
   return (
     <Box marginLeft="3%" marginRight="3%" marginTop="40%">
@@ -65,13 +72,17 @@ export default function RecommendedProducts() {
               maxWidth="30%"
               borderRadius="10"
               borderColor="black"
+              onClick={() => routeChange(item)}
             >
               <Cards
                 key={item.id}
                 name={item.name}
                 id={item.id}
                 price={item.price}
-                image="https://assets.pokemon.com/assets/cms2-de-de/img/cards/web/XY3/XY3_DE_81.png"
+                description={item.description}
+                condition={item.condition}
+                pokemonId={item.pokemonId}
+                image="https://images.pokemontcg.io/xy1/1_hires.png"
               />
             </Box>
           ))}

@@ -122,13 +122,13 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>run e2e tests</id>
+                        <id>run component tests</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
                         <phase>test</phase>
                         <configuration>
-                            <arguments>run cypress</arguments>
+                            <arguments>run cypress --component</arguments>
                         </configuration>
                     </execution>
                 </executions>

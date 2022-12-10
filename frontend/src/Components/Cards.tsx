@@ -13,6 +13,9 @@ type cardprops = {
   image: string;
   id: string;
   price: number;
+  description: string;
+  condition: number;
+  pokemonId: number;
 };
 
 const theme1 = createTheme();
@@ -39,7 +42,15 @@ theme3.typography.h6 = {
     fontSize: "13px",
   },
 };
-export default function Cards({ name, image, id, price }: cardprops) {
+export default function Cards({
+  name,
+  image,
+  id,
+  price,
+  description,
+  condition,
+  pokemonId,
+}: cardprops) {
   return (
     <div /* style={{overflow:"hidden"}}*/>
       <CardActionArea
