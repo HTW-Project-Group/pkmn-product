@@ -112,16 +112,6 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>run tests</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>test</phase>
-                        <configuration>
-                            <arguments>test -- --watchAll=false --forceExit --detectOpenHandles</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>run e2e tests</id>
                         <goals>
                             <goal>npm</goal>
