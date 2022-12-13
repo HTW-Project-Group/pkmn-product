@@ -1,38 +1,91 @@
-.App {
-    text-align: center;
+/* Classes */
+.header-bar {
+  display: flex;
+  height: var(--header-size);
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+.content-banner {
+  width: 100%;
+  height: calc(100% - var(--header-size));
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 0;
+  pointer-events: none;
+}
+.content-banner .pokemon-logo {
+  position: absolute;
+  top: 32px;
+  width: min(200px, 15%);
+}
+.content-banner .pokemon-overview {
+  width: min(80%, 1200px);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.recommended-products .header {
+  width: 100%;
+  padding: 0 0 32px;
+}
+.card-list {
+  --item-padding: 16px;
+  --card-count: 8;
+  --view-padding: 32px;
+  width: min(calc(100% - 2 * var(--view-padding)), calc(225px * var(--card-count)));
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--item-padding);
+  transition: all 0.25s ease-in-out;
+}
+.card-list > .card {
+  width: min(calc((100% - var(--item-padding) * (var(--card-count) - 1)) / var(--card-count)), 225px);
+  transition: all 0.25s ease-in-out;
+}
+.card-list > .card:hover {
+  transform: translateY(-10px);
+}
+.card-list > .card:hover img {
+  transform: perspective(400px) rotateY(10deg);
+  animation: swing-card 1.5s linear;
+  animation-iteration-count: 100;
+}
+@keyframes swing-card {
+  0% {
+    transform: perspective(400px) rotateY(0deg);
+  }
+  25% {
+    transform: perspective(400px) rotateY(10deg);
+  }
+  75% {
+    transform: perspective(400px) rotateY(-10deg);
+  }
+  100% {
+    transform: perspective(400px) rotateY(0deg);
+  }
+}
+.card-list > .card .card-title {
+  color: var(--color-grey);
+  font-size: 18px;
+}
+.card-list > .card .card-price {
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--color-primary);
 }
 
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .card-list {
+    --card-count: 6;
+  }
 }
-
-.App-link {
-    color: #61dafb;
+@media (max-width: 1024px) and (min-width: 720px) {
+  .card-list {
+    --card-count: 4;
+  }
 }
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+@media (max-width: 720px) {
+  .card-list {
+    --card-count: 2;
+  }
 }

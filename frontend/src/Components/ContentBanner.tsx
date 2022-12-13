@@ -1,11 +1,19 @@
 import * as React from "react";
+import Box from "@mui/material/Box";
 
 export default function ContentBanner() {
   return (
-    <div id="wallpaperdiv">
-      <div id="wallpaper"></div>
-      <div id="logo"></div>
-      <div id="infobox"></div>
-    </div>
+    <Box className="content-banner">
+      <img
+        className="pokemon-logo"
+        src="/img/pokemon_logo.png"
+        alt="Pokemon Logo"
+      />
+      <img
+        className="pokemon-overview"
+        src="/img/pokemon_overview.jpg"
+        alt="Pokemon Overview"
+      />
+    </Box>
   );
 }

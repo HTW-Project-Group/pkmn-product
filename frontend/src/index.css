@@ -1,29 +1,76 @@
+/* Global Variables */
+:root {
+  --header-size: 64px;
+
+  --color-black: #252525;
+  --color-grey: #777777;
+  --color-primary: #2979C1;
+  --color-secondary: #FFCB05;
+
+  --gradient-primary: linear-gradient(0deg, #3A5CA8, #1897DC);
+}
+
+/* Default Elements */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.body{
-  background-image: url("../resources/hintergr.jpg")
-}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
 
-.card-container {
-  width: min(90%, 800px);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0 auto;
+h1, h2, p {
+  transition: all 0.25s ease-in;
 }
-.card {
-  padding: 10px 20px;
+
+h1 {
   font-size: 24px;
-  min-width: 150px;
+  color: #fff;
+  width: max-content;
+  background: var(--gradient-primary);
+  padding: 0.5em 2em;
+  border-radius: 8px;
+  text-transform: uppercase;
+  margin: 0 auto;
+  box-shadow: var(--color-primary) 0 4px 8px -2px;
+}
+h2 {
+  font-size: 16px;
+  color: var(--color-black);
+}
+
+p {
+  color: var(--color-black);
+}
+
+
+@media (max-width: 1280px) and (min-width: 1024px) {
+  h1 {
+    font-size: 22px;
+  }
+}
+@media (max-width: 1024px) and (min-width: 720px) {
+  h1 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 720px) {
+  h1 {
+    font-size: min(4vw, 20px);
+  }
+}
+
+
+/* Misc */
+.disable-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
