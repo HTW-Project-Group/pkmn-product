@@ -11,7 +11,11 @@ export default function CardView(card: Card) {
           component="img"
           height="auto"
           width="auto"
-          image="/img/example_pokemon.png"
+          image={
+            "https://images.pokemontcg.io/" +
+            card.pokemonId.replaceAll("-", "/") +
+            ".png"
+          }
         />
         <CardContent sx={{ padding: 0, paddingTop: 1 }}>
           <Typography className="card-title">{card.name}</Typography>

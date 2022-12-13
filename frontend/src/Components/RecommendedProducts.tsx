@@ -3,6 +3,7 @@ import CardView from "./Product/CardView";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import Card from "../Model/Card";
+import Typography from "@mui/material/Typography";
 
 export default function RecommendedProducts() {
   const [products, setProducts] = useState([]);
@@ -35,7 +36,7 @@ export default function RecommendedProducts() {
         <h1>Recommended Products</h1>
       </Box>
       <Box className="card-list">
-        {products.map((item: Card) => (
+        {products.slice(0, 8).map((item: Card) => (
           <Box key={item.id} className="card">
             <CardView
               id={item.id}
@@ -47,6 +48,10 @@ export default function RecommendedProducts() {
             />
           </Box>
         ))}
+        <Typography color="#f00">
+          TODO: Hier in RecommendedProducts.tsx products.slice() entfernen, wenn
+          Backend für Recommended Products steht
+        </Typography>
       </Box>
     </Box>
   );
