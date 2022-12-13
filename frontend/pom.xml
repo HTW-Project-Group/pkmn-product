@@ -112,23 +112,13 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>run tests</id>
+                        <id>run e2e tests</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
                         <phase>test</phase>
                         <configuration>
-                            <arguments>test -- --watchAll=false --forceExit --detectOpenHandles</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>run component tests</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>test</phase>
-                        <configuration>
-                            <arguments>run cypress --component</arguments>
+                            <arguments>run cypress</arguments>
                         </configuration>
                     </execution>
                 </executions>

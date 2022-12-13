@@ -4,5 +4,5 @@ export default interface Card {
   price: number;
   description: string;
   condition: number;
-  pokemonId: number;
+  pokemonId: string;
 }

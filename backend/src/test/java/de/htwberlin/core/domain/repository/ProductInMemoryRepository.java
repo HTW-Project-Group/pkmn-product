@@ -3,6 +3,7 @@ package de.htwberlin.core.domain.repository;
 import de.htwberlin.core.domain.model.Product;
 import java.util.*;
 
+@SuppressWarnings("NullableProblems")
 public class ProductInMemoryRepository extends BaseInMemoryRepository<Product, UUID>
     implements IProductRepository {
 
@@ -18,10 +19,22 @@ public class ProductInMemoryRepository extends BaseInMemoryRepository<Product, U
     return entities.values().stream().filter(e -> e.getPokemonId().equals(pokemonId)).findFirst();
   }
 
-  @SuppressWarnings("NullableProblems")
   @Override
   public <S extends Product> S save(S entity) {
     entities.put(entity.getId(), entity);
     return entity;
+  }
+
+  @Override
+  public <S extends Product> List<S> saveAll(Iterable<S> entities) {
+    entities.forEach((entity) -> this.entities.put(entity.getId(), entity));
+    List<S> result = new ArrayList<>();
+    entities.forEach(result::add);
+    return result;
+  }
+
+  @Override
+  public List<Product> findAll() {
+    return List.copyOf(entities.values());
   }
 }

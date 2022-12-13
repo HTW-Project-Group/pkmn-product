@@ -6,12 +6,13 @@ import Typography from "@mui/material/Typography";
 import SearchBar from "./SearchBar";
 import NavActions from "./NavActions";
 
-export default function DrawerAppBar() {
+export default function Header() {
   return (
-    <Box id="BlueBar" sx={{ display: "flex" }}>
+    <Box className="header-bar">
       <AppBar component="nav">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography
+            className="disable-select"
             variant="h6"
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
