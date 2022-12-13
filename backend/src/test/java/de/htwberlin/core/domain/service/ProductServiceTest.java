@@ -9,6 +9,7 @@ import de.htwberlin.core.appservice.dto.ProductFactory;
 import de.htwberlin.core.domain.model.Product;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
+import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,26 @@ class ProductServiceTest {
     productRepository = new ProductInMemoryRepository();
     productMapper = new IProductMapperImpl();
     productService = new ProductService(productRepository, productMapper);
+  }
+
+  @Test
+  void shouldReturnAllProducts() {
+    // given
+    final UUID id1 = UUID.fromString("10000000-0000-0000-0000-000000000000");
+    final UUID id2 = UUID.fromString("20000000-0000-0000-0000-000000000000");
+    final List<Product> products =
+        productMapper.toEntities(
+            List.of(
+                ProductFactory.simpleProduct().id(id1).build(),
+                ProductFactory.simpleProduct().id(id2).build()));
+    productRepository.saveAll(products);
+
+    // when
+    var result = productService.findAllProducts();
+
+    // then
+    assertThat(result).hasSize(2);
+    assertThat(result).extracting(ProductDto::getId).containsExactlyInAnyOrder(id1, id2);
   }
 
   @Test
