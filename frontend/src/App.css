@@ -23,6 +23,9 @@
   width: min(80%, 1200px);
 }
 
+.recommended-products {
+  padding: 64px 0;
+}
 .recommended-products .header {
   width: 100%;
   padding: 0 0 32px;
@@ -72,6 +75,9 @@
   font-weight: bold;
   font-size: 14px;
   color: var(--color-primary);
+}
+.card-list > .card img {
+  border-radius: 5px;
 }
 
 @media (max-width: 1280px) and (min-width: 1024px) {
