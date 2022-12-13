@@ -22,7 +22,7 @@ public class Pokemon implements Serializable {
   private List<ValueType> weaknesses;
   private List<ValueType> resistances;
   private Set set;
-  private Integer number;
+  private String number;
   private String artist;
   private String rarity;
 

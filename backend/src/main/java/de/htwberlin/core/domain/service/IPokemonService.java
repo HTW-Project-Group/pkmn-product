@@ -8,7 +8,7 @@ public interface IPokemonService {
 
   Optional<Pokemon> findPokemonById(String id);
 
-  List<Pokemon> findPokemonByName(String type);
+  List<Pokemon> findPokemonByName(String name);
 
   List<Pokemon> findPokemonByType(String type);
 
@@ -16,9 +16,9 @@ public interface IPokemonService {
 
   List<Pokemon> findPokemonByWeakness(String weakness);
 
-  List<Pokemon> findPokemonByResistance(String weakness);
+  List<Pokemon> findPokemonByResistance(String resistance);
 
   List<Pokemon> findPokemonBySetName(String setName);
 
-  List<Pokemon> findPokemonByRarity(String setName);
+  List<Pokemon> findPokemonByRarity(String rarity);
 }
