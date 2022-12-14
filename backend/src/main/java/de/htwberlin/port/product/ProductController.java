@@ -4,6 +4,7 @@ import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.domain.service.IProductService;
 import de.htwberlin.port.exception.ProductNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,12 @@ public class ProductController {
   private final IProductService productService;
 
   @GetMapping
-  public ResponseEntity<List<ProductDto>> getProducts() {
+  public ResponseEntity<List<ProductDto>> getProducts(@RequestParam Optional<Integer> amount) {
+    // Looks exactly like a null checker, is there a better way?
+    if (amount.isPresent()) {
+      return new ResponseEntity<>(
+          productService.findCertainAmountOfProducts(amount.get().intValue()), HttpStatus.OK);
+    }
     return new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK);
   }
 

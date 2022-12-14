@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 
 import ProductDetail from "../Components/ProductDetail";
 import RecommendedProducts from "../Components/RecommendedProducts";
-import Card from "../Components/Interfaces/Card";
+import Card from "../Model/Card";
 
 export default function ProductDetails() {
   const { state } = useLocation();
@@ -24,18 +24,17 @@ export default function ProductDetails() {
         <Header />
       </Box>
       <Box
-        margin={"9% auto"}
+        margin={"5% auto"}
         minHeight={"40%"}
         maxWidth={"70%"}
         display={"flex"}
         flexWrap="wrap"
         justifyContent={"center"}
         alignContent={"center"}
-        border={"1px solid black"}
       >
         <ProductDetail {...card} />
       </Box>
-      <Box marginTop={"-30%"}>
+      <Box>
         <RecommendedProducts />
       </Box>
     </Box>

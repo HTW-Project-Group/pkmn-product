@@ -3,11 +3,13 @@ package de.htwberlin.core.domain.service;
 import de.htwberlin.core.appservice.dto.IProductMapper;
 import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.domain.repository.IProductRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -23,6 +25,18 @@ public class ProductService implements IProductService {
   @Override
   public List<ProductDto> findAllProducts() {
     return productRepository.findAll().stream().map(productMapper::toDto).toList();
+  }
+
+  @Override
+  public List<ProductDto> findCertainAmountOfProducts(int amount) {
+    List<ProductDto> result = new ArrayList<>();
+    long amountInRepository = productRepository.count();
+    for (int i = 0; i < amount; i++) {
+      int index = (int) (Math.random() * amountInRepository);
+      var entity = productRepository.findAll(PageRequest.of(index, 1)).map(productMapper::toDto);
+      result.add(entity.getContent().get(0));
+    }
+    return result;
   }
 
   @Override

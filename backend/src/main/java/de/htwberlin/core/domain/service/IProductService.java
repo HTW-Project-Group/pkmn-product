@@ -9,6 +9,8 @@ public interface IProductService {
 
   List<ProductDto> findAllProducts();
 
+  List<ProductDto> findCertainAmountOfProducts(int amount);
+
   Optional<ProductDto> findProductById(UUID id);
 
   Optional<ProductDto> findProductByPokemonId(String id);
