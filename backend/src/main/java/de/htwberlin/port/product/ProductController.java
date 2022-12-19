@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/products")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class ProductController {
 
   private final IProductService productService;
@@ -24,7 +24,7 @@ public class ProductController {
     // Looks exactly like a null checker, is there a better way?
     if (amount.isPresent()) {
       return new ResponseEntity<>(
-          productService.findCertainAmountOfProducts(amount.get().intValue()), HttpStatus.OK);
+          productService.findCertainAmountOfProducts(amount.get()), HttpStatus.OK);
     }
     return new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK);
   }

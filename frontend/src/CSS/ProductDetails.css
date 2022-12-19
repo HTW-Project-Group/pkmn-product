@@ -1,0 +1,66 @@
+.productDetail {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 64px 0;
+    gap: 50px;
+    justify-content: center;
+}
+
+.detailImage {
+
+    width: 100%;
+    height: auto;
+}
+
+.detailImageContainer {
+    transition: all 0.25s ease-in-out;
+    background-color: #1897DC;
+}
+
+
+@media (max-width: 1920px) and (min-width: 1280px) {
+    .detailImageContainer {
+        max-width: 30%;
+    }
+}
+@media (max-width: 1280px) and (min-width: 720px) {
+    .detailImageContainer {
+        width: 40%;
+    }
+}
+@media (max-width: 720px) {
+    .detailImageContainer {
+        width: 50%;
+    }
+}
+
+.details {
+    width: 60%;
+}
+
+p {
+    hyphens: auto;
+    text-align: justify
+}
+
+.addToBasketContainer {
+    justify-content: end;
+}
+
+.addToBasket {
+    background-color: #1897DC;
+    width: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-self:flex-end;
+    gap: 0 30px;
+}
+
+.detailPrice {
+    color: var(--color-primary);
+}
+
+

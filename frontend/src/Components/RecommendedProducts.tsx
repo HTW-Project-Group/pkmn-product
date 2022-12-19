@@ -3,7 +3,6 @@ import CardView from "./Product/CardView";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import Card from "../Model/Card";
-import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 
 export default function RecommendedProducts() {
@@ -44,7 +43,12 @@ export default function RecommendedProducts() {
       </Box>
       <Box className="card-list">
         {products.map((item: Card) => (
-          <Box key={item.id} className="card" onClick={() => routeChange(item)}>
+          <Box
+            key={item.id}
+            className="card"
+            onClick={() => routeChange(item)}
+            data-cy="card"
+          >
             <CardView
               id={item.id}
               name={item.name}
@@ -55,10 +59,6 @@ export default function RecommendedProducts() {
             />
           </Box>
         ))}
-        <Typography color="#f00">
-          TODO: Hier in RecommendedProducts.tsx products.slice() entfernen, wenn
-          Backend für Recommended Products steht
-        </Typography>
       </Box>
     </Box>
   );
