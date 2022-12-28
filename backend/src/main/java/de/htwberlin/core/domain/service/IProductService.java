@@ -15,5 +15,5 @@ public interface IProductService {
 
   ProductDto createProduct(ProductDto dto);
 
-  ProductDto updateProduct(ProductDto dto);
+  ProductDto updateProduct(ProductDto dto, UUID id);
 }

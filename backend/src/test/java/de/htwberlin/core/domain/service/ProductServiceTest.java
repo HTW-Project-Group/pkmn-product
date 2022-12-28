@@ -9,6 +9,7 @@ import de.htwberlin.core.appservice.dto.ProductFactory;
 import de.htwberlin.core.domain.model.Product;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
+import de.htwberlin.port.adapter.AttributeAdapter;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +25,9 @@ class ProductServiceTest {
   void setUp() {
     productRepository = new ProductInMemoryRepository();
     productMapper = new IProductMapperImpl();
-    productService = new ProductService(productRepository, productMapper);
+    var attributeAdapter = new AttributeAdapter<ProductDto>();
+
+    productService = new ProductService(productRepository, productMapper, attributeAdapter);
   }
 
   @Test
