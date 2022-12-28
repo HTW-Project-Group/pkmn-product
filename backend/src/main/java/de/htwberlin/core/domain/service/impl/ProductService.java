@@ -1,8 +1,9 @@
-package de.htwberlin.core.domain.service;
+package de.htwberlin.core.domain.service.impl;
 
 import de.htwberlin.core.appservice.dto.IProductMapper;
 import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.domain.repository.IProductRepository;
+import de.htwberlin.core.domain.service.IProductService;
 import de.htwberlin.port.adapter.AttributeAdapter;
 import de.htwberlin.port.exception.ProductNotFoundException;
 import java.util.ArrayList;
