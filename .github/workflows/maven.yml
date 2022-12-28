@@ -20,7 +20,7 @@ jobs:
     - name: Start Docker containers
       run: docker-compose -f "docker-compose.yml" up -d --build
     - name: Build with Maven
-      run: mvn -B package --file pom.xml -DskipTests
+      run: mvn -B package --file pom.xml -DskipTests -ntp
   test:
     runs-on: ubuntu-latest
     steps:
@@ -34,4 +34,4 @@ jobs:
     - name: Start Docker containers
       run: docker-compose -f "docker-compose.yml" up -d --build
     - name: Run Tests
-      run: mvn test package --file pom.xml
+      run: mvn test package --file pom.xml -ntp

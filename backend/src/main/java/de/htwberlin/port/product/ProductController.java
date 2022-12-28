@@ -51,7 +51,8 @@ public class ProductController {
   }
 
   @PutMapping("/{id}/edit")
-  public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) {
-    return new ResponseEntity<>(productService.updateProduct(productDto), HttpStatus.OK);
+  public ResponseEntity<ProductDto> updateProduct(
+      @RequestBody ProductDto productDto, @PathVariable("id") UUID id) {
+    return new ResponseEntity<>(productService.updateProduct(productDto, id), HttpStatus.OK);
   }
 }
