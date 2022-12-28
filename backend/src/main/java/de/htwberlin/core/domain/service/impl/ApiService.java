@@ -1,4 +1,4 @@
-package de.htwberlin.core.domain.service;
+package de.htwberlin.core.domain.service.impl;
 
 import de.htwberlin.port.adapter.PokemonApiClient;
 import java.util.Optional;

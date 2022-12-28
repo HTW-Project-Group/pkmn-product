@@ -3,6 +3,7 @@ package de.htwberlin.core.domain.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import de.htwberlin.core.domain.model.Pokemon;
+import de.htwberlin.core.domain.service.impl.PokemonService;
 import de.htwberlin.port.adapter.PokemonApiClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -230,5 +231,29 @@ class PokemonServiceTest {
 
     // then
     assertThat(result).isEmpty();
+  }
+
+  @Test
+  void findPokemonBySearchQuery() {
+    // given
+    final var query = "name:charizard subtypes:mega";
+
+    // when
+    var result = pokemonService.findPokemonIdsBySearchQuery(query);
+
+    // then
+    assertThat(result).isNotEmpty();
+  }
+
+  @Test
+  void findPokemonBySearchQueryEmpty() {
+    // given
+    final var query = "";
+
+    // when
+    var result = pokemonService.findPokemonIdsBySearchQuery(query);
+
+    // then
+    assertThat(result).isNotEmpty();
   }
 }

@@ -10,7 +10,7 @@ import de.htwberlin.core.appservice.dto.ProductFactory;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
 import de.htwberlin.core.domain.service.IProductService;
-import de.htwberlin.core.domain.service.ProductService;
+import de.htwberlin.core.domain.service.impl.ProductService;
 import de.htwberlin.port.adapter.AttributeAdapter;
 import de.htwberlin.port.annotation.IntegrationTest;
 import java.util.UUID;
