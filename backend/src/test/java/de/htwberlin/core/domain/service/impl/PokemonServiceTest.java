@@ -1,9 +1,9 @@
-package de.htwberlin.core.domain.service;
+package de.htwberlin.core.domain.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import de.htwberlin.core.domain.model.Pokemon;
-import de.htwberlin.core.domain.service.impl.PokemonService;
+import de.htwberlin.core.domain.service.IPokemonService;
 import de.htwberlin.port.adapter.PokemonApiClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

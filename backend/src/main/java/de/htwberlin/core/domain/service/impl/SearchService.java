@@ -6,6 +6,7 @@ import de.htwberlin.core.domain.service.IPokemonService;
 import de.htwberlin.core.domain.service.IProductService;
 import de.htwberlin.core.domain.service.ISearchService;
 import de.htwberlin.port.exception.InvalidSearchException;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,8 +51,28 @@ public class SearchService implements ISearchService {
             .toList();
     var resultIds = pokemonService.findPokemonIdsBySearchQuery(String.join(" ", mappedParams));
 
-    return productService.findAllProducts().stream()
-        .filter(p -> resultIds.contains(p.getPokemonId()))
-        .toList();
+    var resultList =
+        productService.findAllProducts().stream()
+            .filter(p -> resultIds.contains(p.getPokemonId()))
+            .toList();
+
+    return getSublistWithIndexAndSize(resultList, page, pageSize);
+  }
+
+  protected <T> List<T> getSublistWithIndexAndSize(List<T> list, int index, int size) {
+    List<List<T>> resultList = new ArrayList<>();
+    List<T> tmp = new ArrayList<>();
+
+    for (T p : list) {
+      tmp.add(p);
+      if (tmp.size() == size) {
+        resultList.add(tmp);
+        tmp = new ArrayList<>();
+      }
+    }
+    resultList.add(tmp);
+
+    var i = index - 1;
+    return i < resultList.size() && i >= 0 ? resultList.get(i) : List.of();
   }
 }
