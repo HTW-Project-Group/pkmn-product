@@ -7,10 +7,11 @@ import java.util.List;
 
 public interface ISearchService {
 
-  List<ProductDto> searchForProducts(SearchParam... params) throws InvalidSearchException;
+  List<ProductDto> searchForProducts(List<SearchParam> params) throws InvalidSearchException;
 
-  List<ProductDto> searchForProducts(int page, SearchParam... params) throws InvalidSearchException;
+  List<ProductDto> searchForProducts(List<SearchParam> params, int page)
+      throws InvalidSearchException;
 
-  List<ProductDto> searchForProducts(int page, int pageSize, SearchParam... params)
+  List<ProductDto> searchForProducts(List<SearchParam> params, int page, int pageSize)
       throws InvalidSearchException;
 }

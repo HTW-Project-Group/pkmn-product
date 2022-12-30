@@ -3,15 +3,15 @@ package de.htwberlin.core.domain.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import de.htwberlin.core.appservice.dto.IProductMapperImpl;
 import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.appservice.dto.ProductFactory;
+import de.htwberlin.core.appservice.mapper.AttributeMapper;
+import de.htwberlin.core.appservice.mapper.IProductMapperImpl;
 import de.htwberlin.core.domain.model.SearchParam;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
 import de.htwberlin.core.domain.service.impl.PokemonService;
 import de.htwberlin.core.domain.service.impl.ProductService;
 import de.htwberlin.core.domain.service.impl.SearchService;
-import de.htwberlin.core.appservice.mapper.AttributeMapper;
 import de.htwberlin.port.adapter.PokemonApiClient;
 import de.htwberlin.port.exception.InvalidSearchException;
 import java.util.List;
@@ -52,7 +52,7 @@ class SearchServiceTest {
     var search = SearchParam.builder().param("name").value("Pikachu").build();
 
     // when
-    var result = searchService.searchForProducts(search);
+    var result = searchService.searchForProducts(List.of(search));
 
     // then
     assertThat(result).hasSize(2);
@@ -69,7 +69,7 @@ class SearchServiceTest {
     var search = SearchParam.builder().param("name").value("pIKaChU").build();
 
     // when
-    var result = searchService.searchForProducts(search);
+    var result = searchService.searchForProducts(List.of(search));
 
     // then
     assertThat(result).hasSize(2);
@@ -87,7 +87,7 @@ class SearchServiceTest {
     var searchParam2 = SearchParam.builder().param("types").value("fire").build();
 
     // when
-    var result = searchService.searchForProducts(searchParam1, searchParam2);
+    var result = searchService.searchForProducts(List.of(searchParam1, searchParam2));
 
     // then
     assertThat(result).hasSize(1);
@@ -98,7 +98,7 @@ class SearchServiceTest {
   @Test
   void shouldThrowExceptionWhenParamsAreNotValid() {
     // given
-    var search = SearchParam.builder().param("invalidParam").value("null").build();
+    var search = List.of(SearchParam.builder().param("invalidParam").value("null").build());
 
     // when + then
     assertThatThrownBy(() -> searchService.searchForProducts(search))
@@ -108,11 +108,11 @@ class SearchServiceTest {
   @Test
   void shouldThrowExceptionWhenPageSizeIsTooLarge() {
     // given
-    var search = SearchParam.builder().param("name").value("Pikachu").build();
+    var search = List.of(SearchParam.builder().param("name").value("Pikachu").build());
     var pageSize = 9999;
 
     // when + then
-    assertThatThrownBy(() -> searchService.searchForProducts(1, pageSize, search))
+    assertThatThrownBy(() -> searchService.searchForProducts(search, 1, pageSize))
         .isInstanceOf(InvalidSearchException.class);
   }
 }

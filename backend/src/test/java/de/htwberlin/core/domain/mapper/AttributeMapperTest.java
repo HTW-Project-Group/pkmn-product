@@ -4,9 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.appservice.dto.ProductFactory;
-import java.util.UUID;
-
 import de.htwberlin.core.appservice.mapper.AttributeMapper;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

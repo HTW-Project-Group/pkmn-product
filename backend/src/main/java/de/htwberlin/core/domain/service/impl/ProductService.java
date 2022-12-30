@@ -1,10 +1,10 @@
 package de.htwberlin.core.domain.service.impl;
 
-import de.htwberlin.core.appservice.mapper.IProductMapper;
 import de.htwberlin.core.appservice.dto.ProductDto;
+import de.htwberlin.core.appservice.mapper.AttributeMapper;
+import de.htwberlin.core.appservice.mapper.IProductMapper;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.service.IProductService;
-import de.htwberlin.core.appservice.mapper.AttributeMapper;
 import de.htwberlin.port.exception.ProductNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
