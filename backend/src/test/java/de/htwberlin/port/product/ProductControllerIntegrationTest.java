@@ -4,14 +4,14 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import de.htwberlin.core.appservice.dto.IProductMapperImpl;
 import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.appservice.dto.ProductFactory;
+import de.htwberlin.core.appservice.mapper.AttributeMapper;
+import de.htwberlin.core.appservice.mapper.IProductMapperImpl;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
 import de.htwberlin.core.domain.service.IProductService;
 import de.htwberlin.core.domain.service.impl.ProductService;
-import de.htwberlin.core.appservice.mapper.AttributeMapper;
 import de.htwberlin.port.annotation.IntegrationTest;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;

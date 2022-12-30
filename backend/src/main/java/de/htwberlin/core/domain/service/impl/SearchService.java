@@ -7,7 +7,6 @@ import de.htwberlin.core.domain.service.IProductService;
 import de.htwberlin.core.domain.service.ISearchService;
 import de.htwberlin.port.exception.InvalidSearchException;
 import java.util.List;
-import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,32 +20,32 @@ public class SearchService implements ISearchService {
   private final IPokemonService pokemonService;
 
   @Override
-  public List<ProductDto> searchForProducts(SearchParam... params) throws InvalidSearchException {
-    return searchForProducts(1, 250, params);
-  }
-
-  @Override
-  public List<ProductDto> searchForProducts(int page, SearchParam... params)
+  public List<ProductDto> searchForProducts(List<SearchParam> params)
       throws InvalidSearchException {
-    return searchForProducts(page, 250, params);
+    return searchForProducts(params, 1, 250);
   }
 
   @Override
-  public List<ProductDto> searchForProducts(int page, int pageSize, SearchParam... params)
+  public List<ProductDto> searchForProducts(List<SearchParam> params, int page)
+      throws InvalidSearchException {
+    return searchForProducts(params, page, 250);
+  }
+
+  @Override
+  public List<ProductDto> searchForProducts(List<SearchParam> params, int page, int pageSize)
       throws InvalidSearchException {
     if (pageSize > 250) {
       throw new InvalidSearchException("The max Page Size is 250");
     }
-    Stream.of(params)
-        .forEach(
-            p -> {
-              if (!SearchParam.Params.contains(p.getParam())) {
-                throw new InvalidSearchException(params);
-              }
-            });
+    params.forEach(
+        p -> {
+          if (!SearchParam.Params.contains(p.getParam())) {
+            throw new InvalidSearchException(params);
+          }
+        });
 
     var mappedParams =
-        Stream.of(params)
+        params.stream()
             .map(p -> p.getParam() + ":\"*" + p.getValue().toLowerCase() + "*\"")
             .toList();
     var resultIds = pokemonService.findPokemonIdsBySearchQuery(String.join(" ", mappedParams));
