@@ -1,4 +1,4 @@
-package de.htwberlin.core.domain.service;
+package de.htwberlin.core.domain.service.impl;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -10,7 +10,7 @@ import de.htwberlin.core.appservice.mapper.IProductMapperImpl;
 import de.htwberlin.core.domain.model.Product;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
-import de.htwberlin.core.domain.service.impl.ProductService;
+import de.htwberlin.core.domain.service.IProductService;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
