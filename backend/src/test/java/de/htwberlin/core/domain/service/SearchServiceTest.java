@@ -11,7 +11,7 @@ import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
 import de.htwberlin.core.domain.service.impl.PokemonService;
 import de.htwberlin.core.domain.service.impl.ProductService;
 import de.htwberlin.core.domain.service.impl.SearchService;
-import de.htwberlin.port.adapter.AttributeAdapter;
+import de.htwberlin.core.appservice.mapper.AttributeMapper;
 import de.htwberlin.port.adapter.PokemonApiClient;
 import de.htwberlin.port.exception.InvalidSearchException;
 import java.util.List;
@@ -25,7 +25,7 @@ class SearchServiceTest {
   @BeforeEach
   void setUp() {
     var productMapper = new IProductMapperImpl();
-    var attributeAdapter = new AttributeAdapter<ProductDto>();
+    var attributeMapper = new AttributeMapper<ProductDto>();
     var productRepository = new ProductInMemoryRepository();
 
     var products =
@@ -38,7 +38,7 @@ class SearchServiceTest {
                 ProductFactory.simpleProduct().name("Charizard").pokemonId("base1-4").build()));
     productRepository.saveAll(products);
 
-    var productService = new ProductService(productRepository, productMapper, attributeAdapter);
+    var productService = new ProductService(productRepository, productMapper, attributeMapper);
 
     var apiClient = new PokemonApiClient();
     var pokemonService = new PokemonService(apiClient);

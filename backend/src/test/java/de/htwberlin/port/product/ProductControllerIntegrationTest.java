@@ -11,7 +11,7 @@ import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
 import de.htwberlin.core.domain.service.IProductService;
 import de.htwberlin.core.domain.service.impl.ProductService;
-import de.htwberlin.port.adapter.AttributeAdapter;
+import de.htwberlin.core.appservice.mapper.AttributeMapper;
 import de.htwberlin.port.annotation.IntegrationTest;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,9 +34,9 @@ class ProductControllerIntegrationTest {
   void setUp() {
     // given
     var productMapper = new IProductMapperImpl();
-    var attributeAdapter = new AttributeAdapter<ProductDto>();
+    var attributeMapper = new AttributeMapper<ProductDto>();
     repository = new ProductInMemoryRepository();
-    productService = new ProductService(repository, productMapper, attributeAdapter);
+    productService = new ProductService(repository, productMapper, attributeMapper);
     controller = new ProductController(productService);
 
     productService.createProduct(

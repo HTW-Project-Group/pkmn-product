@@ -1,10 +1,10 @@
 package de.htwberlin.core.domain.service.impl;
 
-import de.htwberlin.core.appservice.dto.IProductMapper;
+import de.htwberlin.core.appservice.mapper.IProductMapper;
 import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.service.IProductService;
-import de.htwberlin.port.adapter.AttributeAdapter;
+import de.htwberlin.core.appservice.mapper.AttributeMapper;
 import de.htwberlin.port.exception.ProductNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ProductService implements IProductService {
 
   private final IProductRepository productRepository;
   private final IProductMapper productMapper;
-  private final AttributeAdapter<ProductDto> attributeAdapter;
+  private final AttributeMapper<ProductDto> attributeMapper;
 
   @Override
   public List<ProductDto> findAllProducts() {
@@ -64,7 +64,7 @@ public class ProductService implements IProductService {
   @Override
   public ProductDto updateProduct(ProductDto dto, UUID id) {
     var oldProduct = findProductById(id).orElseThrow(ProductNotFoundException::new);
-    var newProduct = attributeAdapter.copyAttributes(oldProduct, dto);
+    var newProduct = attributeMapper.copyAttributes(oldProduct, dto);
     productRepository.save(productMapper.toEntity(newProduct));
     return newProduct;
   }
