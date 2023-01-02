@@ -4,7 +4,7 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import FilterListIcon from "@mui/icons-material/FilterList";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
@@ -67,20 +67,21 @@ export default function SearchBar() {
     setAnchorElCategory(null);
   };
   return (
-    <Box sx={{ display: "flex" }}>
-      <Search>
+    <Box className="search-bar">
+      <Search className="search-field">
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
+          sx={{ width: "100%" }}
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
         />
       </Search>
-      <Box>
-        <Tooltip title={"Categories"}>
+      <Box className="search-filter">
+        <Tooltip title={"Filter"}>
           <IconButton onClick={handleOpenCategoryMenu} color="inherit">
-            <MenuIcon />
+            <FilterListIcon />
           </IconButton>
         </Tooltip>
         <Menu

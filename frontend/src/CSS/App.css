@@ -1,7 +1,21 @@
 /* Classes */
 .header-bar {
-  display: flex;
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
   height: var(--header-size);
+}
+.search-bar {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  width: min(600px, 50%);
+}
+.search-bar > .search-field {
+  width: 100%;
+}
+.search-bar > .search-filter {
+  position: absolute;
+  right: 0;
 }
 
 .content-banner {
