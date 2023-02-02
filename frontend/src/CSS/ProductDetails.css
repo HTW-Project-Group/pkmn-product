@@ -221,9 +221,24 @@ thead th:nth-child(2) {
 
 p {
     hyphens: auto;
-    text-align: justify
+    text-align: justify;
+    padding:1%;
+    margin:0;
+    font-size: 100%;
+    font-family: "Helvetica", Arial, sans-serif;
 }
+.descriptionPartContainer{
+    display: grid;
 
+}
+.weaknesses{
+    padding-left: 3%;
+    text-align: center;
+}
+.resistances{
+    padding-right: 3%;
+    text-align: center;
+}
 .addToBasketContainer {
     justify-content: end;
 }
@@ -240,7 +255,22 @@ p {
 }
 
 .detailPrice {
-    color: var(--color-primary);
+    color: white;
+}
+.pokemonName{
+    margin:0;
+    padding:0;
+}
+
+.energyMultiplicator{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.artistName{
+    text-align: center;
+    font-size: 110%;
+
 }
 
 
