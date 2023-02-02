@@ -5,6 +5,7 @@ import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.port.adapter.AttributeAdapter;
 import de.htwberlin.port.exception.ProductNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
