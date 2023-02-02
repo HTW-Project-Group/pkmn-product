@@ -39,12 +39,12 @@ export default function RecommendedProducts() {
   return (
     <Box className="recommended-products">
       <Box className="header disable-select">
-        <h1>Recommended Products</h1>
+        <h1 className="recommendedHeadline">Recommended Products</h1>
       </Box>
       <Box className="card-list">
         {products.map((item: Card) => (
           <Box
-            key={item.id}
+            key={item.pokemonId}
             className="card"
             onClick={() => routeChange(item)}
             data-cy="card"

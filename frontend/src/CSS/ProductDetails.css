@@ -1,42 +1,222 @@
 .productDetail {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 80%;
+
     padding: 64px 0;
     gap: 50px;
     justify-content: center;
+    font-family: "Flexo-Demi", arial, sans-serif;
+    margin: auto;
 }
 
 .detailImage {
-
     width: 100%;
     height: auto;
 }
 
 .detailImageContainer {
     transition: all 0.25s ease-in-out;
-    background-color: #1897DC;
 }
 
 
 @media (max-width: 1920px) and (min-width: 1280px) {
     .detailImageContainer {
-        max-width: 30%;
+        width: 30%;
+    }
+
+    .details {
+        width: 30%;
     }
 }
+
 @media (max-width: 1280px) and (min-width: 720px) {
     .detailImageContainer {
         width: 40%;
     }
+
+    .details {
+        width: 60%;
+    }
 }
+
 @media (max-width: 720px) {
     .detailImageContainer {
+        width: 50%;
+    }
+
+    .details {
         width: 50%;
     }
 }
 
 .details {
-    width: 60%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f9ff;
+}
+
+.descriptionHeader {
+    border-radius: 10px 10px 0 0;
+    padding: 1% 5%;
+    background-color: #e61a23;
+    border-style: double;
+    height: 15%;
+    display:flex;
+    align-items: center;
+    gap: 3%;
+}
+
+.descriptionPokemonType {
+    display:flex;
+    align-items: center;
+}
+
+.energy-icon {
+    background-image: url(../../public/img/energy-types.png);
+    width: 25px;
+    height: 25px;
+}
+
+.Water {
+    background-position: 25px  25px;
+}
+
+.Grass{
+    background-position: -25px -50px;
+}
+
+.Fire {
+    background-position: 0 0;
+}
+
+.Lightning {
+    background-position: -50px -50px;
+}
+
+.Psychic {
+    background-position: -75px -25px;
+}
+
+.Fighting {
+    background-position: -50px -25px;
+}
+
+.Darkness {
+    background-position: 0 -50px;
+}
+
+.Metal {
+    background-position: -75px 0;
+}
+
+.Colorless {
+    background-position: -25px 0;
+}
+
+.Fairy {
+    background-position: -50px 0;
+}
+
+.Dragon {
+    background-position: 0 -25px;
+}
+.informationHeader{
+    margin-top: 5%;
+    padding-top: 0;
+    padding-left:5%;
+    height: 40px;
+    display: flex;
+    column-gap: 15%;
+    font-size: 130%;
+    margin-bottom: 4%;
+}
+.informationBody{
+    padding-top: 2%;
+     padding-left: 5%;
+}
+.descriptionPartOne{
+    margin : 0;
+    padding: 2%;
+    font-size: 150%;
+
+}
+.descriptionPartTwo{
+    margin : 0;
+    padding: 2%;
+    font-size: 150%;
+
+
+}
+.descriptionPartOneTd{
+    margin : 0;
+    padding: 2%;
+    font-size: 150%;
+    text-align: left;
+
+}
+.descriptionPartTwoTd{
+    margin : 0;
+    padding: 2%;
+    font-size: 150%;
+    text-align: left;
+
+}
+
+.descriptionFooter {
+    border-radius: 0 0 10px 10px;
+    background-color: #f7f7f7;
+    border-style: double;
+    margin-top: auto;
+    height: 15%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.information {
+    box-sizing: border-box;
+    height: 70%
+}
+table{
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5%;
+}
+tr{
+    width:70%;
+
+    padding:0;
+    margin:0;
+}
+th{
+    width:100%;
+    padding:0;
+    margin:0;
+
+}
+
+
+td{
+    text-align: left;
+    width: 100%;
+    padding:0;
+    margin:0;
+
+
+}
+thead th:nth-child(1) {
+    width: 50%;
+}
+
+thead th:nth-child(2) {
+    width: 50%;
+}
+.descriptionHeader > h1 {
+    color: #ffffff;
+    font-family: "Flexo-Demi", arial, sans-serif;
+    hyphens: auto;
 }
 
 p {
@@ -50,13 +230,13 @@ p {
 
 .addToBasket {
     background-color: #1897DC;
-    width: 30%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    align-self:flex-end;
     gap: 0 30px;
+    margin: auto;
 }
 
 .detailPrice {
