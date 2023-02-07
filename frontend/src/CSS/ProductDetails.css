@@ -2,7 +2,6 @@
     display: flex;
     flex-wrap: wrap;
     width: 80%;
-
     padding: 64px 0;
     gap: 50px;
     justify-content: center;
@@ -18,7 +17,6 @@
 .detailImageContainer {
     transition: all 0.25s ease-in-out;
 }
-
 
 @media (max-width: 1920px) and (min-width: 1280px) {
     .detailImageContainer {
@@ -121,6 +119,7 @@
 .Dragon {
     background-position: 0 -25px;
 }
+
 .informationHeader{
     margin-top: 5%;
     padding-top: 0;
@@ -131,36 +130,36 @@
     font-size: 130%;
     margin-bottom: 4%;
 }
+
 .informationBody{
     padding-top: 2%;
      padding-left: 5%;
 }
+
 .descriptionPartOne{
     margin : 0;
     padding: 2%;
     font-size: 150%;
-
 }
+
 .descriptionPartTwo{
     margin : 0;
     padding: 2%;
     font-size: 150%;
-
-
 }
+
 .descriptionPartOneTd{
     margin : 0;
     padding: 2%;
     font-size: 150%;
     text-align: left;
-
 }
+
 .descriptionPartTwoTd{
     margin : 0;
     padding: 2%;
     font-size: 150%;
     text-align: left;
-
 }
 
 .descriptionFooter {
@@ -178,34 +177,35 @@
     box-sizing: border-box;
     height: 70%
 }
-table{
+
+table {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
     margin-top: 5%;
 }
-tr{
+
+tr {
     width:70%;
 
     padding:0;
     margin:0;
 }
-th{
+
+th {
     width:100%;
     padding:0;
     margin:0;
 
 }
 
-
-td{
+td {
     text-align: left;
     width: 100%;
     padding:0;
     margin:0;
-
-
 }
+
 thead th:nth-child(1) {
     width: 50%;
 }
@@ -213,6 +213,7 @@ thead th:nth-child(1) {
 thead th:nth-child(2) {
     width: 50%;
 }
+
 .descriptionHeader > h1 {
     color: #ffffff;
     font-family: "Flexo-Demi", arial, sans-serif;
@@ -227,18 +228,21 @@ p {
     font-size: 100%;
     font-family: "Helvetica", Arial, sans-serif;
 }
-.descriptionPartContainer{
-    display: grid;
 
+.descriptionPartContainer {
+    display: grid;
 }
-.weaknesses{
+
+.weaknesses {
     padding-left: 3%;
     text-align: center;
 }
+
 .resistances{
     padding-right: 3%;
     text-align: center;
 }
+
 .addToBasketContainer {
     justify-content: end;
 }
@@ -257,6 +261,7 @@ p {
 .detailPrice {
     color: white;
 }
+
 .pokemonName{
     margin:0;
     padding:0;
@@ -267,10 +272,10 @@ p {
     align-items: center;
     justify-content: center;
 }
+
 .artistName{
     text-align: center;
     font-size: 110%;
-
 }
 
 

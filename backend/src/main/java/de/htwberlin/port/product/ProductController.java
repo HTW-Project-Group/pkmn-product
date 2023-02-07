@@ -21,12 +21,8 @@ public class ProductController {
 
   @GetMapping
   public ResponseEntity<List<ProductDto>> getProducts(@RequestParam Optional<Integer> amount) {
-    // Looks exactly like a null checker, is there a better way?
-    if (amount.isPresent()) {
-      return new ResponseEntity<>(
-          productService.findCertainAmountOfProducts(amount.get()), HttpStatus.OK);
-    }
-    return new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK);
+    return amount.map(integer -> new ResponseEntity<>( productService.findCertainAmountOfProducts(integer), HttpStatus.OK))
+            .orElseGet(() -> new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK));
   }
 
   @GetMapping("/{id}")
