@@ -4,6 +4,7 @@ import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.domain.service.IProductService;
 import de.htwberlin.port.exception.ProductNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,14 +14,15 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/products")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class ProductController {
 
   private final IProductService productService;
 
   @GetMapping
-  public ResponseEntity<List<ProductDto>> getProducts() {
-    return new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK);
+  public ResponseEntity<List<ProductDto>> getProducts(@RequestParam Optional<Integer> amount) {
+    return amount.map(integer -> new ResponseEntity<>( productService.findCertainAmountOfProducts(integer), HttpStatus.OK))
+            .orElseGet(() -> new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK));
   }
 
   @GetMapping("/{id}")

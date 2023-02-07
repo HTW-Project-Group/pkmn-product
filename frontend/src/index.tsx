@@ -1,8 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
+import "./CSS/index.css";
+
 import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProductDetails from "./Pages/ProductDetails";
+import App from "./Pages/App";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 const root = ReactDOM.createRoot(
@@ -19,11 +22,24 @@ const theme = createTheme({
   },
 });
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    ),
+  },
+  {
+    path: "details",
+    element: <ProductDetails />,
+  },
+]);
+
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

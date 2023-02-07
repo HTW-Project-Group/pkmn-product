@@ -3,14 +3,14 @@ import CardView from "./Product/CardView";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import Card from "../Model/Card";
-import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
 export default function RecommendedProducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const productList = async () => {
-      const data = await fetch("http://localhost:8080/v1/products", {
+      const data = await fetch("http://localhost:8080/v1/products?amount=8", {
         method: "GET",
       });
       const jsonData = await data.json();
@@ -30,14 +30,25 @@ export default function RecommendedProducts() {
     productList().then((result) => setProducts(result));
   }, []);
 
+  const navigate = useNavigate();
+  const routeChange = (card: Card) => {
+    const path = `/details`;
+    navigate(path, { state: card });
+  };
+
   return (
     <Box className="recommended-products">
       <Box className="header disable-select">
-        <h1>Recommended Products</h1>
+        <h1 className="recommendedHeadline">Recommended Products</h1>
       </Box>
       <Box className="card-list">
-        {products.slice(0, 8).map((item: Card) => (
-          <Box key={item.id} className="card">
+        {products.map((item: Card) => (
+          <Box
+            key={item.pokemonId}
+            className="card"
+            onClick={() => routeChange(item)}
+            data-cy="card"
+          >
             <CardView
               id={item.id}
               name={item.name}
@@ -48,10 +59,6 @@ export default function RecommendedProducts() {
             />
           </Box>
         ))}
-        <Typography color="#f00">
-          TODO: Hier in RecommendedProducts.tsx products.slice() entfernen, wenn
-          Backend für Recommended Products steht
-        </Typography>
       </Box>
     </Box>
   );

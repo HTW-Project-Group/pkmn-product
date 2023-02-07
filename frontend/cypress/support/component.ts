@@ -19,6 +19,10 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+import '../../src/CSS/ProductDetails.css'
+import '../../src/CSS/index.css'
+import '../../src/CSS/App.css'
+
 import { mount } from 'cypress/react18'
 
 // Augment the Cypress namespace to include type definitions for
