@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import ProductDetail from "../Components/ProductDetail";
 import RecommendedProducts from "../Components/RecommendedProducts";
 import Card from "../Model/Card";
-import "../CSS/ProductDetails.css";
+import "../Css/ProductDetails.css";
 
 export default function ProductDetails() {
   const { state } = useLocation();

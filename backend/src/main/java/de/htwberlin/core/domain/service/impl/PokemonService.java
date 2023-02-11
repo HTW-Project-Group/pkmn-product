@@ -1,8 +1,9 @@
-package de.htwberlin.core.domain.service;
+package de.htwberlin.core.domain.service.impl;
 
 import de.htwberlin.core.domain.model.Pokemon;
 import de.htwberlin.core.domain.model.PokemonData;
 import de.htwberlin.core.domain.model.PokemonDataList;
+import de.htwberlin.core.domain.service.IPokemonService;
 import de.htwberlin.port.adapter.PokemonApiClient;
 import java.util.List;
 import java.util.Optional;
@@ -94,6 +95,17 @@ public class PokemonService extends ApiService implements IPokemonService {
     return getRestObjectFromUri(POKEMON_CARDS + "?pageSize=50&q=rarity:" + q, PokemonDataList.class)
         .map(PokemonDataList::getData)
         .orElse(List.of());
+  }
+
+  @Override
+  public List<String> findPokemonIdsBySearchQuery(String searchQuery) {
+    return getRestObjectFromUri(
+            POKEMON_CARDS + "?pageSize=250&select=id&q=" + searchQuery, PokemonDataList.class)
+        .map(PokemonDataList::getData)
+        .orElse(List.of())
+        .stream()
+        .map(Pokemon::getId)
+        .toList();
   }
 
   private String toQueryParam(String str) {

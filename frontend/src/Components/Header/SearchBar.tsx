@@ -4,11 +4,13 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import FilterListIcon from "@mui/icons-material/FilterList";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const categories = ["Fire", "Water", "Grass", "Electric"];
 
@@ -55,6 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchBar() {
+  const navigate = useNavigate();
   const [
     anchorElCategory,
     setAnchorElCategory,
@@ -66,21 +69,39 @@ export default function SearchBar() {
   const handleCloseUserMenu = () => {
     setAnchorElCategory(null);
   };
+
+  const [searchValue, setSearchValue] = useState<string>("");
+  const receiveSearchInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setSearchValue(e.target.value);
+  };
+  const submitSearch = (
+    e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (e.key === "Enter") {
+      navigate(`/search/${searchValue}`);
+    }
+  };
+
   return (
-    <Box sx={{ display: "flex" }}>
-      <Search>
+    <Box className="search-bar">
+      <Search className="search-field">
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
+          sx={{ width: "100%" }}
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
+          onChange={receiveSearchInput}
+          onKeyDown={submitSearch}
         />
       </Search>
-      <Box>
-        <Tooltip title={"Categories"}>
+      <Box className="search-filter">
+        <Tooltip title={"Filter"}>
           <IconButton onClick={handleOpenCategoryMenu} color="inherit">
-            <MenuIcon />
+            <FilterListIcon />
           </IconButton>
         </Tooltip>
         <Menu

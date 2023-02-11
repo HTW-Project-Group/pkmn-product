@@ -4,6 +4,10 @@ import Typography from "@mui/material/Typography";
 import Card from "../../Model/Card";
 
 export default function CardView(card: Card) {
+  const formatPrice = (price: number): string => {
+    return (Math.round(price * 100) / 100).toFixed(2) + " €";
+  };
+
   return (
     <div>
       <CardActionArea sx={{ padding: 1 }}>
@@ -19,7 +23,9 @@ export default function CardView(card: Card) {
         />
         <CardContent sx={{ padding: 0, paddingTop: 1 }}>
           <Typography className="card-title">{card.name}</Typography>
-          <Typography className="card-price">{card.price}€</Typography>
+          <Typography className="card-price">
+            {formatPrice(card.price)}
+          </Typography>
         </CardContent>
       </CardActionArea>
     </div>

@@ -19,9 +19,9 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import '../../src/CSS/ProductDetails.css'
-import '../../src/CSS/index.css'
-import '../../src/CSS/App.css'
+import '../../src/Css/ProductDetails.css'
+import '../../src/Css/index.css'
+import '../../src/Css/App.css'
 
 import { mount } from 'cypress/react18'
 

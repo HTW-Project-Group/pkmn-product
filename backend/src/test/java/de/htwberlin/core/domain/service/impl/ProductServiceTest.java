@@ -1,15 +1,16 @@
-package de.htwberlin.core.domain.service;
+package de.htwberlin.core.domain.service.impl;
 
 import static org.assertj.core.api.Assertions.*;
 
-import de.htwberlin.core.appservice.dto.IProductMapper;
-import de.htwberlin.core.appservice.dto.IProductMapperImpl;
 import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.appservice.dto.ProductFactory;
+import de.htwberlin.core.appservice.mapper.AttributeMapper;
+import de.htwberlin.core.appservice.mapper.IProductMapper;
+import de.htwberlin.core.appservice.mapper.IProductMapperImpl;
 import de.htwberlin.core.domain.model.Product;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
-import de.htwberlin.port.adapter.AttributeAdapter;
+import de.htwberlin.core.domain.service.IProductService;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,9 +26,9 @@ class ProductServiceTest {
   void setUp() {
     productRepository = new ProductInMemoryRepository();
     productMapper = new IProductMapperImpl();
-    var attributeAdapter = new AttributeAdapter<ProductDto>();
+    var attributeMapper = new AttributeMapper<ProductDto>();
 
-    productService = new ProductService(productRepository, productMapper, attributeAdapter);
+    productService = new ProductService(productRepository, productMapper, attributeMapper);
   }
 
   @Test

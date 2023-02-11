@@ -21,4 +21,6 @@ public interface IPokemonService {
   List<Pokemon> findPokemonBySetName(String setName);
 
   List<Pokemon> findPokemonByRarity(String rarity);
+
+  List<String> findPokemonIdsBySearchQuery(String searchQuery);
 }

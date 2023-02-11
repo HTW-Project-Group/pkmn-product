@@ -1,14 +1,14 @@
 import * as React from "react";
 import Header from "../Components/Header/Header";
-import ContentBanner from "../Components/ContentBanner";
 import RecommendedProducts from "../Components/RecommendedProducts";
-import "../Css/App.css";
+import "../Css/SearchResults.css";
+import SearchResults from "../Components/Search/SearchResults";
 
-export default function App() {
+export default function SearchResultPage() {
   return (
     <div>
       <Header />
-      <ContentBanner />
+      <SearchResults />
       <RecommendedProducts />
     </div>
   );

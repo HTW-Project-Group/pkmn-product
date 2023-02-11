@@ -1,4 +1,4 @@
-package de.htwberlin.port.adapter;
+package de.htwberlin.core.appservice.mapper;
 
 import static java.util.Optional.ofNullable;
 
@@ -11,8 +11,9 @@ import org.springframework.stereotype.Component;
 @SuppressWarnings("java:S3011")
 @Slf4j
 @Component
-public class AttributeAdapter<T> {
+public class AttributeMapper<T> implements IAttributeMapper<T> {
 
+  @Override
   public T copyAttributes(T source, T target) {
     try {
       Map<String, Field> toFieldNameMap = new HashMap<>();

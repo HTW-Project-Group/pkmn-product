@@ -1,20 +1,21 @@
-package de.htwberlin.port.adapter;
+package de.htwberlin.core.domain.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.appservice.dto.ProductFactory;
+import de.htwberlin.core.appservice.mapper.AttributeMapper;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AttributeAdapterTest {
+class AttributeMapperTest {
 
-  private AttributeAdapter<ProductDto> attributeAdapter;
+  private AttributeMapper<ProductDto> attributeMapper;
 
   @BeforeEach
   void setUp() {
-    attributeAdapter = new AttributeAdapter<>();
+    attributeMapper = new AttributeMapper<>();
   }
 
   @Test
@@ -25,7 +26,7 @@ class AttributeAdapterTest {
     var target = product.name("Charizard GX").build();
 
     // when
-    var result = attributeAdapter.copyAttributes(source, target);
+    var result = attributeMapper.copyAttributes(source, target);
 
     // then
     assertThat(result.getName()).isEqualTo("Charizard GX");
@@ -44,7 +45,7 @@ class AttributeAdapterTest {
     var target = ProductDto.builder().id(null).condition(0).price(0.0).name("Charizard GX").build();
 
     // when
-    var result = attributeAdapter.copyAttributes(source, target);
+    var result = attributeMapper.copyAttributes(source, target);
 
     // then
     assertThat(result.getName()).isEqualTo("Charizard GX");
@@ -59,7 +60,7 @@ class AttributeAdapterTest {
     var target = ProductDto.builder().name("Charizard GX").build();
 
     // when
-    var result = attributeAdapter.copyAttributes(null, target);
+    var result = attributeMapper.copyAttributes(null, target);
 
     // then
     assertThat(result.getName()).isEqualTo("Charizard GX");
@@ -72,7 +73,7 @@ class AttributeAdapterTest {
     var source = ProductFactory.simpleProduct().build();
 
     // when
-    var result = attributeAdapter.copyAttributes(source, null);
+    var result = attributeMapper.copyAttributes(source, null);
 
     // then
     assertThat(result).isEqualTo(source);

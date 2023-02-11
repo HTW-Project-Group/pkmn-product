@@ -1,12 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import "./CSS/index.css";
+import "./Css/index.css";
 
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProductDetails from "./Pages/ProductDetails";
 import App from "./Pages/App";
 import { createTheme, ThemeProvider } from "@mui/material";
+import SearchResultPage from "./Pages/SearchResultPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "details",
     element: <ProductDetails />,
+  },
+  {
+    path: "search/:query",
+    element: <SearchResultPage />,
   },
 ]);
 
