@@ -54,7 +54,7 @@ export default function ProductDetails({
     <Box className="productDetail">
       <Box className="detailImageContainer">
         <img
-            alt="pokemon"
+          alt="pokemon"
           className="detailImage"
           src={
             "https://images.pokemontcg.io/" +

@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import de.htwberlin.core.domain.service.*;
+import de.htwberlin.core.domain.service.impl.PokemonService;
 import de.htwberlin.port.adapter.PokemonApiClient;
 import de.htwberlin.port.annotation.IntegrationTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @IntegrationTest
-public class PokemonControllerIntegrationTest {
+class PokemonControllerIntegrationTest {
   private MockMvc mvc;
   @MockBean private IPokemonService pokemonService;
   @MockBean private PokemonController pokemonController;

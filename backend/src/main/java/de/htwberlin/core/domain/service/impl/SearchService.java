@@ -45,6 +45,15 @@ public class SearchService implements ISearchService {
           }
         });
 
+    if (params.size() == 1 && params.get(0).getParam().equals("name")) {
+      var name = params.get(0).getValue();
+      var resultList =
+          productService.findAllProducts().stream()
+              .filter(p -> p.getName().toLowerCase().contains(name.toLowerCase()))
+              .toList();
+      return getSublistWithIndexAndSize(resultList, page, pageSize);
+    }
+
     var mappedParams =
         params.stream()
             .map(p -> p.getParam() + ":\"*" + p.getValue().toLowerCase() + "*\"")

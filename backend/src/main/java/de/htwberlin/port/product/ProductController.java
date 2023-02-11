@@ -21,8 +21,12 @@ public class ProductController {
 
   @GetMapping
   public ResponseEntity<List<ProductDto>> getProducts(@RequestParam Optional<Integer> amount) {
-    return amount.map(integer -> new ResponseEntity<>( productService.findCertainAmountOfProducts(integer), HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK));
+    return amount
+        .map(
+            integer ->
+                new ResponseEntity<>(
+                    productService.findCertainAmountOfProducts(integer), HttpStatus.OK))
+        .orElseGet(() -> new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK));
   }
 
   @GetMapping("/{id}")

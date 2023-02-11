@@ -1,0 +1,20 @@
+h1.search-header {
+  text-align: center;
+  width: 100%;
+}
+.search-result-container {
+  min-height: 600px;
+}
+.search-result-container .no-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.search-result-container .no-results p {
+  color: var(--color-grey);
+  text-align: center;
+}
+input.search-query {
+  display: none;
+}
