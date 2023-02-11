@@ -1,11 +1,11 @@
 import * as React from "react";
-import {Box, IconButton, Typography, Badge} from "@mui/material";
+import { Box, IconButton, Typography, Badge } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import {AccountCircle} from "@mui/icons-material";
-import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import {useNavigate} from "react-router-dom";
+import { AccountCircle } from "@mui/icons-material";
+import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
+import { useNavigate } from "react-router-dom";
 
 const settings = ["Account", "Logout"];
 
@@ -24,12 +24,16 @@ export default function NavActions() {
   };
 
   return (
-    <Box sx={{display: "flex"}}>
+    <Box sx={{ display: "flex" }}>
       <Box>
         <Tooltip title="Basket">
-          <IconButton color="inherit" aria-label="add to shopping cart" onClick={() => navigate("/basket")}>
+          <IconButton
+            color="inherit"
+            aria-label="add to shopping cart"
+            onClick={() => navigate("/basket")}
+          >
             <Badge badgeContent={4} color="error">
-              <LocalGroceryStoreIcon/>
+              <LocalGroceryStoreIcon />
             </Badge>
           </IconButton>
         </Tooltip>
@@ -37,11 +41,11 @@ export default function NavActions() {
       <Box>
         <Tooltip title="Actions">
           <IconButton onClick={handleOpenUserMenu} color="inherit">
-            <AccountCircle/>
+            <AccountCircle />
           </IconButton>
         </Tooltip>
         <Menu
-          sx={{mt: "45px"}}
+          sx={{ mt: "45px" }}
           id="menu-appbar"
           anchorEl={anchorElUser}
           anchorOrigin={{

@@ -2,7 +2,7 @@ import * as React from "react";
 import { CardActionArea, CardContent, CardMedia } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Card from "../../Model/Card";
-import {formatPrice} from "../../Helper/Format";
+import { formatPrice } from "../../Helper/Format";
 
 export default function CardView(card: Card) {
   return (
