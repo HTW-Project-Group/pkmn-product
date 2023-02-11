@@ -9,7 +9,7 @@ module.exports = {
         "plugin:@typescript-eslint/recommended"
     ],
     "overrides": [],
-    "ignorePatterns": ['*.test.tsx', 'reportWebVitals.js', 'setupTests.js'],
+    "ignorePatterns": ['*.test.tsx', 'zreportWebVitals.js', 'zsetupTests.js'],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",

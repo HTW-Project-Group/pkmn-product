@@ -2,45 +2,13 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import "./Css/index.css";
 
-import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ProductDetails from "./Pages/ProductDetails";
-import App from "./Pages/App";
-import { createTheme, ThemeProvider } from "@mui/material";
-import SearchResultPage from "./Pages/SearchResultPage";
+import zreportWebVitals from "./zreportWebVitals";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#2979C1",
-    },
-    secondary: {
-      main: "#FFCB05",
-    },
-  },
-});
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    ),
-  },
-  {
-    path: "details",
-    element: <ProductDetails />,
-  },
-  {
-    path: "search/:query",
-    element: <SearchResultPage />,
-  },
-]);
 
 root.render(
   <React.StrictMode>
@@ -49,6 +17,6 @@ root.render(
 );
 
 // If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
+// to log results (for example: zreportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+zreportWebVitals();
