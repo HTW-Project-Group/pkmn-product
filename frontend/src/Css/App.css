@@ -36,13 +36,22 @@
 .content-banner .pokemon-overview {
   width: min(80%, 1200px);
 }
+.opening-text {
+  width: min(1200px, 90%);
+  margin: 0 auto;
+}
 
 .recommended-products {
   padding: 64px 0;
 }
 .recommended-products .header {
+  display: flex;
+  align-items: center;
   width: 100%;
   padding: 0 0 32px;
+}
+.recommended-products img.recommended-products-img {
+  margin: 0 auto;
 }
 .card-list {
   --item-padding: 16px;

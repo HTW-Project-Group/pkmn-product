@@ -220,15 +220,6 @@ thead th:nth-child(2) {
     hyphens: auto;
 }
 
-p {
-    hyphens: auto;
-    text-align: justify;
-    padding:1%;
-    margin:0;
-    font-size: 100%;
-    font-family: "Helvetica", Arial, sans-serif;
-}
-
 .descriptionPartContainer {
     display: grid;
 }

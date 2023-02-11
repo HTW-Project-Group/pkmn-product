@@ -5,6 +5,7 @@ import ProductDetailPage from "./Pages/ProductDetailPage";
 import SearchResultPage from "./Pages/SearchResultPage";
 import * as React from "react";
 import { theme } from "./theme";
+import BasketPage from "./Pages/BasketPage";
 
 export const router = createBrowserRouter([
   {
@@ -22,5 +23,9 @@ export const router = createBrowserRouter([
   {
     path: "search/:query",
     element: <SearchResultPage />,
+  },
+  {
+    path: "basket",
+    element: <BasketPage />,
   },
 ]);

@@ -5,8 +5,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import SearchBar from "../Search/SearchBar";
 import NavActions from "./NavActions";
+import {useNavigate} from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
     <Box className="header-bar">
       <AppBar component="nav">
@@ -15,7 +18,8 @@ export default function Header() {
             className="disable-select"
             variant="h6"
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: "none", sm: "block" }, cursor: "pointer" }}
+            onClick={() => navigate("/")}
           >
             PKMN
           </Typography>

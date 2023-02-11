@@ -1,0 +1,70 @@
+.basket-container {
+  width: min(90%, 1200px);
+  min-height: 600px;
+  padding-bottom: 100px;
+  margin: 0 auto;
+}
+.basket-container .order-sum-container {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin: 50px 0 75px;
+  width: 50%;
+  float: right;
+}
+.basket-container .order-sum-label {
+  font-size: 14px;
+  color: var(--color-grey);
+}
+.basket-container [class*=MuiDivider] {
+  width: 100%;
+}
+.basket-container .order-sum-value {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 5px 0 40px;
+}
+
+.basket-item {
+  display: grid;
+  grid-template-columns: 200px 1fr 100px;
+  margin: 10px 0;
+}
+.basket-item .basket-item-img {
+  width: 180px;
+  aspect-ratio: 1;
+  margin: 10px 10px 10px 0;
+  overflow: hidden;
+}
+.basket-item .basket-item-img img {
+  width: 100%;
+}
+.basket-item .basket-item-actions {
+  display: flex;
+  align-items: center;
+}
+.basket-item .basket-item-actions [class*=MuiFormControl] {
+  margin-left: 0;
+}
+.basket-item .basket-item-content {
+  display: flex;
+  flex-direction: column;
+}
+.basket-item .basket-item-content p {
+  padding: 0;
+  margin: 0;
+}
+.basket-item .basket-item-price {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: end;
+  float: bottom;
+  margin-bottom: 20px;
+}
+.basket-item .basket-item-price .price {
+  font-size: 18px;
+  font-weight: bold;
+}
+.basket-item .basket-item-price .quantity {
+  color: var(--color-grey);
+}
