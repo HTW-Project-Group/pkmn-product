@@ -25,24 +25,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 0;
+  padding: 0 0 32px 0;
   pointer-events: none;
 }
 .content-banner .pokemon-logo {
   position: absolute;
   top: 32px;
-  width: min(200px, 15%);
+  width: min(400px, 25%);
+  filter: drop-shadow(5px 5px 10px #000);
 }
 .content-banner .pokemon-overview {
-  width: min(80%, 1200px);
+  /*width: min(80%, 1200px);*/
+  width: 100%;
+}
+.opening-text {
+  width: min(1200px, 90%);
+  margin: 0 auto;
 }
 
 .recommended-products {
   padding: 64px 0;
 }
 .recommended-products .header {
+  display: flex;
+  align-items: center;
   width: 100%;
   padding: 0 0 32px;
+}
+.recommended-products img.recommended-products-img {
+  margin: 0 auto;
 }
 .card-list {
   --item-padding: 16px;

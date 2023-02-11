@@ -1,16 +1,17 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import { Box, IconButton, Typography, Badge } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { AccountCircle } from "@mui/icons-material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
+import { useNavigate } from "react-router-dom";
 
 const settings = ["Account", "Logout"];
 
 export default function NavActions() {
+  const navigate = useNavigate();
+
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -26,8 +27,14 @@ export default function NavActions() {
     <Box sx={{ display: "flex" }}>
       <Box>
         <Tooltip title="Basket">
-          <IconButton color="inherit" aria-label="add to shopping cart">
-            <AddShoppingCartIcon />
+          <IconButton
+            color="inherit"
+            aria-label="add to shopping cart"
+            onClick={() => navigate("/basket")}
+          >
+            <Badge badgeContent={4} color="error">
+              <LocalGroceryStoreIcon />
+            </Badge>
           </IconButton>
         </Tooltip>
       </Box>

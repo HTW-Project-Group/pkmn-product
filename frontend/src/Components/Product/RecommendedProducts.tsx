@@ -39,7 +39,12 @@ export default function RecommendedProducts() {
   return (
     <Box className="recommended-products">
       <Box className="header disable-select">
-        <h1 className="recommendedHeadline">Recommended Products</h1>
+        <img
+          className="recommended-products-img"
+          src="/img/recommended_products.jpg"
+          alt="Recommended Products"
+        />
+        {/*<h1 className="recommended">Recommended Products</h1>*/}
       </Box>
       <Box className="card-list">
         {products.map((item: Card) => (

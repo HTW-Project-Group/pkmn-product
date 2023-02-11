@@ -11,7 +11,7 @@ export default function ContentBanner() {
       />
       <img
         className="pokemon-overview"
-        src="/img/pokemon_overview.jpg"
+        src="/img/pokemon_wallpaper.jpg"
         alt="Pokemon Overview"
       />
     </Box>
