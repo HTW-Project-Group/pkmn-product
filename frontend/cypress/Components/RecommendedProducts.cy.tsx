@@ -1,5 +1,5 @@
 import * as React from 'react'
-import RecommendedProducts from "../../src/Components/RecommendedProducts";
+import RecommendedProducts from "../../src/Components/Product/RecommendedProducts";
 import {BrowserRouter} from "react-router-dom";
 import Card from "../../src/Model/Card";
 

@@ -1,12 +1,12 @@
 import * as React from "react";
 import Header from "../Components/Header/Header";
 import { useLocation } from "react-router-dom";
-import ProductDetail from "../Components/ProductDetail";
-import RecommendedProducts from "../Components/RecommendedProducts";
+import ProductDetail from "../Components/Product/ProductDetail";
+import RecommendedProducts from "../Components/Product/RecommendedProducts";
 import Card from "../Model/Card";
 import "../Css/ProductDetails.css";
 
-export default function ProductDetails() {
+export default function ProductDetailPage() {
   const { state } = useLocation();
   const card: Card = {
     id: state.id, // default werte beachten

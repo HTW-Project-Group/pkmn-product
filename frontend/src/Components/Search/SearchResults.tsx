@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Card from "../../Model/Card";
 import CardView from "../Product/CardView";
 import { useParams } from "react-router-dom";
-import { useMutationObservable } from "../Misc/UseMutationObservable";
+import { useMutationObservable } from "../../Helper/UseMutationObservable";
 
 function ResultRenderer({ products }: { products: Card[] }) {
   if (products.length > 0) {

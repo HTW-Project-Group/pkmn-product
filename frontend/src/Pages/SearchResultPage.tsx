@@ -1,6 +1,6 @@
 import * as React from "react";
 import Header from "../Components/Header/Header";
-import RecommendedProducts from "../Components/RecommendedProducts";
+import RecommendedProducts from "../Components/Product/RecommendedProducts";
 import "../Css/SearchResults.css";
 import SearchResults from "../Components/Search/SearchResults";
 

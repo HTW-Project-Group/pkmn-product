@@ -1,9 +1,9 @@
 import * as React from "react";
-import CardView from "./Product/CardView";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
-import Card from "../Model/Card";
 import { useNavigate } from "react-router-dom";
+import Card from "../../Model/Card";
+import CardView from "./CardView";
 
 export default function RecommendedProducts() {
   const [products, setProducts] = useState([]);

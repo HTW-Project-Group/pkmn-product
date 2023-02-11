@@ -1,5 +1,5 @@
 import * as React from 'react'
-import ProductDetail from "../../src/Components/ProductDetail"
+import ProductDetail from "../../src/Components/Product/ProductDetail"
 import Card from "../../src/Model/Card"
 
 describe('Header.cy.ts', () => {

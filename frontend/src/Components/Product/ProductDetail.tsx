@@ -1,10 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-import AddToBasket from "./AddToBasket";
-import Card from "../Model/Card";
 import { useEffect, useState } from "react";
-import Pokemon from "../Model/Pokemon";
+import Card from "../../Model/Card";
+import Pokemon from "../../Model/Pokemon";
+import AddToBasket from "../Basket/AddToBasket";
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
