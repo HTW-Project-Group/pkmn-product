@@ -3,10 +3,12 @@ import { Box } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Card from "../../Model/Card";
 import CardView from "../Product/CardView";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutationObservable } from "../../Helper/UseMutationObservable";
 
 function ResultRenderer({ products }: { products: Card[] }) {
+  const navigate = useNavigate();
+
   if (products.length > 0) {
     return (
       <Box className="card-list">
@@ -14,7 +16,7 @@ function ResultRenderer({ products }: { products: Card[] }) {
           <Box
             key={item.pokemonId}
             className="card"
-            onClick={() => null}
+            onClick={() => navigate(`/details/${item.pokemonId}`)}
             data-cy="card"
           >
             <CardView

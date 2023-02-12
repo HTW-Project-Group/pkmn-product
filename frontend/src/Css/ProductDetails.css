@@ -1,272 +1,124 @@
-.productDetail {
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    padding: 64px 0;
-    gap: 50px;
-    justify-content: center;
-    font-family: "Flexo-Demi", arial, sans-serif;
-    margin: auto;
+.product-detail-root {
+  width: min(90%, 1200px);
+  padding: 50px 0 100px;
+  margin: 0 auto;
+}
+.product-detail-wrapper {
+  display: flex;
+  gap: 75px;
+  padding-bottom: 50px;
+}
+.product-detail-wrapper .image-container {
+  width: 250px;
+  margin-top: 5px;
+}
+.product-detail-wrapper img.detail-image {
+  width: 100%;
+  border-radius: 5px;
+}
+.product-detail-wrapper .image-container .artist-name {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--color-grey);
 }
 
-.detailImage {
-    width: 100%;
-    height: auto;
+.product-detail-container {
+  flex-grow: 1;
 }
-
-.detailImageContainer {
-    transition: all 0.25s ease-in-out;
+.product-detail-container .name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-
-@media (max-width: 1920px) and (min-width: 1280px) {
-    .detailImageContainer {
-        width: 30%;
-    }
-
-    .details {
-        width: 30%;
-    }
+.product-detail-container h1 {
+  margin: 0;
 }
-
-@media (max-width: 1280px) and (min-width: 720px) {
-    .detailImageContainer {
-        width: 40%;
-    }
-
-    .details {
-        width: 60%;
-    }
+.product-detail-container .detail-split {
+  display: flex;
 }
-
-@media (max-width: 720px) {
-    .detailImageContainer {
-        width: 50%;
-    }
-
-    .details {
-        width: 50%;
-    }
+.product-detail-container .attributes {
+  width: 400px;
+  border-collapse: separate;
+  border-spacing: 0 16px;
 }
-
-.details {
-    display: flex;
-    flex-direction: column;
-    background-color: #f3f9ff;
+.product-detail-container .attributes .attack-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-
-.descriptionHeader {
-    border-radius: 10px 10px 0 0;
-    padding: 1% 5%;
-    background-color: #e61a23;
-    border-style: double;
-    height: 15%;
-    display:flex;
-    align-items: center;
-    gap: 3%;
+.product-detail-container .attributes p.attack {
+  margin: 0;
 }
-
-.descriptionPokemonType {
-    display:flex;
-    align-items: center;
+.product-detail-container .attributes td {
+  vertical-align: top;
+}
+.product-detail-container .attributes tr td:first-child {
+  color: var(--color-grey);
+}
+.product-detail-container .weak-resi-container {
+  margin-top: 16px;
+}
+.product-detail-container .weak-resi-container .wr-label {
+  color: var(--color-grey);
+}
+.product-detail-container .type-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 12px;
 }
 
 .energy-icon {
-    background-image: url(../../public/img/energy-types.png);
-    width: 25px;
-    height: 25px;
+  background-image: url(../../public/img/energy-types.png);
+  width: 25px;
+  height: 25px;
+}
+.energy-icon.water {
+  background-position: 25px 25px;
+}
+.energy-icon.grass {
+  background-position: -25px -50px;
+}
+.energy-icon.fire {
+  background-position: 0 0;
+}
+.energy-icon.lightning {
+  background-position: -50px -50px;
+}
+.energy-icon.psychic {
+  background-position: -75px -25px;
+}
+.energy-icon.fighting {
+  background-position: -50px -25px;
+}
+.energy-icon.darkness {
+  background-position: 0 -50px;
+}
+.energy-icon.metal {
+  background-position: -75px 0;
+}
+.energy-icon.colorless {
+  background-position: -25px 0;
+}
+.energy-icon.fairy {
+  background-position: -50px 0;
+}
+.energy-icon.dragon {
+  background-position: 0 -25px;
 }
 
-.Water {
-    background-position: 25px  25px;
+.add-to-basket-container {
+  margin-top: 50px;
 }
-
-.Grass{
-    background-position: -25px -50px;
+.add-to-basket-container .detail-price {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  text-align: right;
 }
-
-.Fire {
-    background-position: 0 0;
+.add-to-basket-container .add-basket-group {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
 }
-
-.Lightning {
-    background-position: -50px -50px;
-}
-
-.Psychic {
-    background-position: -75px -25px;
-}
-
-.Fighting {
-    background-position: -50px -25px;
-}
-
-.Darkness {
-    background-position: 0 -50px;
-}
-
-.Metal {
-    background-position: -75px 0;
-}
-
-.Colorless {
-    background-position: -25px 0;
-}
-
-.Fairy {
-    background-position: -50px 0;
-}
-
-.Dragon {
-    background-position: 0 -25px;
-}
-
-.informationHeader{
-    margin-top: 5%;
-    padding-top: 0;
-    padding-left:5%;
-    height: 40px;
-    display: flex;
-    column-gap: 15%;
-    font-size: 130%;
-    margin-bottom: 4%;
-}
-
-.informationBody{
-    padding-top: 2%;
-     padding-left: 5%;
-}
-
-.descriptionPartOne{
-    margin : 0;
-    padding: 2%;
-    font-size: 150%;
-}
-
-.descriptionPartTwo{
-    margin : 0;
-    padding: 2%;
-    font-size: 150%;
-}
-
-.descriptionPartOneTd{
-    margin : 0;
-    padding: 2%;
-    font-size: 150%;
-    text-align: left;
-}
-
-.descriptionPartTwoTd{
-    margin : 0;
-    padding: 2%;
-    font-size: 150%;
-    text-align: left;
-}
-
-.descriptionFooter {
-    border-radius: 0 0 10px 10px;
-    background-color: #f7f7f7;
-    border-style: double;
-    margin-top: auto;
-    height: 15%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.information {
-    box-sizing: border-box;
-    height: 70%
-}
-
-table {
-    table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 5%;
-}
-
-tr {
-    width:70%;
-
-    padding:0;
-    margin:0;
-}
-
-th {
-    width:100%;
-    padding:0;
-    margin:0;
-
-}
-
-td {
-    text-align: left;
-    width: 100%;
-    padding:0;
-    margin:0;
-}
-
-thead th:nth-child(1) {
-    width: 50%;
-}
-
-thead th:nth-child(2) {
-    width: 50%;
-}
-
-.descriptionHeader > h1 {
-    color: #ffffff;
-    font-family: "Flexo-Demi", arial, sans-serif;
-    hyphens: auto;
-}
-
-.descriptionPartContainer {
-    display: grid;
-}
-
-.weaknesses {
-    padding-left: 3%;
-    text-align: center;
-}
-
-.resistances{
-    padding-right: 3%;
-    text-align: center;
-}
-
-.addToBasketContainer {
-    justify-content: end;
-}
-
-.addToBasket {
-    background-color: #1897DC;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0 30px;
-    margin: auto;
-}
-
-.detailPrice {
-    color: white;
-}
-
-.pokemonName{
-    margin:0;
-    padding:0;
-}
-
-.energyMultiplicator{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.artistName{
-    text-align: center;
-    font-size: 110%;
-}
-
-

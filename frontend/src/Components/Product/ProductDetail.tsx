@@ -10,9 +10,8 @@ export default function ProductDetails({
 }: {
   pokemonId: string | undefined;
 }) {
-  const initialEmptyPokemon = {} as Pokemon;
-  const [pokemon, setPokemon] = useState<Pokemon>(initialEmptyPokemon);
-  const [price, setPrice] = useState(0);
+  const [pokemon, setPokemon] = useState<Pokemon>({} as Pokemon);
+  const [product, setProduct] = useState<Card>({} as Card);
 
   useEffect(() => {
     const pokemonDetails = async () => {
@@ -42,8 +41,6 @@ export default function ProductDetails({
       return pokemon;
     };
     pokemonDetails().then((result) => setPokemon(result));
-
-
   }, [pokemonId]);
 
   useEffect(() => {
@@ -57,160 +54,110 @@ export default function ProductDetails({
       return data.json();
     };
 
-    getProductByPokemonId().then((result) => setPrice(result.price));
-  }, [pokemonId])
+    getProductByPokemonId().then((result) => setProduct(result));
+  }, [pokemonId]);
 
   return (
-    <Box className="productDetail">
-      <Box className="detailImageContainer">
-        <img
-          alt="pokemon"
-          className="detailImage"
-          src={
-            "https://images.pokemontcg.io/" +
-            pokemonId?.replaceAll("-", "/") +
-            "_hires.png"
-          }
-        />
-      </Box>
-      <Box className="details">
-        <Box className="descriptionHeader">
-          <h1 className="pokemonName">{pokemon.name}</h1>
-          {pokemon.types != null &&
-            pokemon.types.map((type) => (
-              <Box className="descriptionPokemonType" key={type}>
-                <Box className={"energy-icon " + type} />
-              </Box>
-            ))}
-        </Box>
-        <Box className="information">
-          <table>
-            <tbody>
+    <div className="product-detail-root">
+      <div className="product-detail-wrapper">
+        <div className="image-container">
+          <img
+            alt="Pokemon Card"
+            className="detail-image"
+            src={
+              "https://images.pokemontcg.io/" +
+              pokemonId?.replaceAll("-", "/") +
+              "_hires.png"
+            }
+          />
+          <span className="artist-name">Illustrator: {pokemon.artist}</span>
+        </div>
+        <div className="product-detail-container">
+          <div className="name-wrapper">
+            <h1 className="pokemon-name">{pokemon.name}</h1>
+            {pokemon.types != null &&
+              pokemon.types.map((type) => (
+                <Box
+                  className={"energy-icon " + type.toLowerCase()}
+                  key={type}
+                />
+              ))}
+          </div>
+
+          <div className="detail-split">
+            <table className="attributes">
               <tr>
-                <th scope="row" className="descriptionPartOneTd">
-                  <p className="descriptionPart">Card Type: </p>
-                </th>
-                <td className="descriptionPartTwoTd">
-                  <p className="descriptionPart">{pokemon.supertype}</p>
-                </td>
+                <td>Card Type</td>
+                <td>{pokemon.supertype}</td>
+              </tr>
+              <tr>
+                <td>Rarity</td>
+                <td>{pokemon.rarity}</td>
               </tr>
               {pokemon.hp != null && (
                 <tr>
-                  <th scope="row" className="descriptionPartOneTd">
-                    <p className="descriptionPart">Health Points: </p>
-                  </th>
-                  <td className="descriptionPartTwoTd">
-                    <p className="descriptionPart">{pokemon.hp}HP</p>
-                  </td>
+                  <td>Health Points</td>
+                  <td>{pokemon.hp} HP</td>
                 </tr>
               )}
-              <tr>
-                <th scope="row" className="descriptionPartOneTd">
-                  <p className="descriptionPart">Rarity: </p>
-                </th>
-                <td className="descriptionPartTwoTd">
-                  <p className="descriptionPart">{pokemon.rarity}</p>
-                </td>
-              </tr>
               {pokemon.attacks != null && (
                 <tr>
-                  <th scope="row" className="descriptionPartOneTd">
-                    <p className="descriptionPart"> Attack Name:</p>
-                  </th>
-
-                  <td className="descriptionPartTwoTd">
+                  <td>Attacks</td>
+                  <td className="attack-container">
                     {pokemon.attacks.map((attack) => (
-                      <p className="descriptionPart" key={attack.name}>
+                      <p className="attack" key={attack.name}>
                         {attack.name}
                       </p>
                     ))}
                   </td>
                 </tr>
               )}
-
               <tr>
-                <th scope="row" className="descriptionPartOneTd">
-                  <p>Set Name: </p>
-                </th>
-                <td>
-                  {pokemon.set != null && (
-                    <p className="descriptionPartTwoTd">{pokemon.set.name}</p>
-                  )}
-                </td>
+                <td>Set</td>
+                <td>{pokemon.set?.name}</td>
               </tr>
-            </tbody>
-          </table>
-
-          <table>
-            <thead>
-              <tr>
-                {pokemon.weaknesses != null && (
-                  <th scope="col" className="weaknesses">
-                    Weaknesses:
-                  </th>
-                )}
-                {pokemon.resistances != null && (
-                  <th scope="col">Resistances:</th>
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
+            </table>
+            <div className="weak-resi-container">
+              {pokemon.weaknesses != null && (
+                <span className="wr-label">Weaknesses</span>
+              )}
+              <div className="type-container">
                 {pokemon.weaknesses != null &&
-                  pokemon.weaknesses.map((weaknesses) => (
-                    <td className="descriptionPartTwoTd" key={weaknesses.type}>
-                      <Box className="energyMultiplicator">
-                        <Box
-                          className={"energy-icon" + " " + weaknesses.type}
-                        ></Box>
-                        <p>{weaknesses.value}</p>
-                      </Box>
-                    </td>
+                  pokemon.weaknesses.map((w) => (
+                    <div className="type-container" key={w.type}>
+                      <Box
+                        className={"energy-icon" + " " + w.type.toLowerCase()}
+                      ></Box>
+                      <p>{w.value}</p>
+                    </div>
                   ))}
-                {pokemon.resistances != null && pokemon.resistances.length == 1
-                  ? pokemon.resistances.map((resistances) => (
-                      <td
-                        className="descriptionPartTwoTd"
-                        key={resistances.type}
-                      >
-                        <Box className="energyMultiplicator">
-                          <Box
-                            className={"energy-icon" + " " + resistances.type}
-                          ></Box>
-                          <p>{resistances.value}</p>
-                        </Box>
-                      </td>
-                    ))
-                  : pokemon.resistances != null &&
-                    pokemon.resistances.length == 2 && (
-                      <td className="descriptionPartTwoTd">
-                        <Box className="energyMultiplicator">
-                          <Box
-                            className={
-                              "energy-icon" + " " + pokemon.resistances[0].type
-                            }
-                          ></Box>
-                          <Box
-                            className={
-                              "energy-icon" + " " + pokemon.resistances[1].type
-                            }
-                          ></Box>
-                          <p>{pokemon.resistances[0].value}</p>
-                        </Box>
-                      </td>
-                    )}
-              </tr>
-            </tbody>
-          </table>
-        </Box>
-        <Box className={"addToBasketContainer"}>
-          <AddToBasket price={price} />
-        </Box>
-        <Box className="descriptionFooter">
-          <br />
-          <p className="artistName">Illustrator: {pokemon.artist}</p>
-        </Box>
-      </Box>
-    </Box>
+              </div>
+
+              {pokemon.resistances != null && (
+                <span className="wr-label">Resistances</span>
+              )}
+              <div className="type-container">
+                {pokemon.resistances != null &&
+                  pokemon.resistances.map((r) => (
+                    <div className="type-container" key={r.type}>
+                      <Box
+                        className={"energy-icon" + " " + r.type.toLowerCase()}
+                      ></Box>
+                      <p>{r.value}</p>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>About this Card</h2>
+      <p>{product.description}</p>
+
+      <div className="add-to-basket-container">
+        <AddToBasket price={product.price} />
+      </div>
+    </div>
   );
 }

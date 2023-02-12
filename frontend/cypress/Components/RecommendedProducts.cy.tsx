@@ -26,6 +26,6 @@ describe('RecommendedProducts.cy.ts', () => {
             body: productMockArray
         })
         cy.get('[data-cy="card"]').first().click();
-        cy.location('pathname').should('eq', '/details')
+        cy.location('pathname').should('eq', '/details/swsh9-166')
     })
 })

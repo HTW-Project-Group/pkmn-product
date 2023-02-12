@@ -14,7 +14,7 @@ import { useState } from "react";
 export default function BasketItemView({ item }: { item: BasketItem }) {
   const [quantity, setQuantity] = useState(item.quantity);
 
-  const quantityChange = (e, item) => {
+  const quantityChange = (e) => {
     setQuantity(e.target.value);
   };
 
