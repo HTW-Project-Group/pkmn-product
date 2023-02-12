@@ -15,7 +15,7 @@ export default function RecommendedProducts() {
         method: "GET",
       });
       const jsonData = await data.json();
-      return jsonData.map((data: any) => {
+      return jsonData.map((data) => {
         const card: Card = {
           id: data.id,
           name: data.name,

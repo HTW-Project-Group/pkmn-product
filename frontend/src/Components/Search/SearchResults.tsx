@@ -50,7 +50,7 @@ export default function SearchResults() {
       method: "GET",
     });
     const jsonData = await data.json();
-    return jsonData.map((data: any) => {
+    return jsonData.map((data) => {
       const card: Card = {
         id: data.id,
         name: data.name,

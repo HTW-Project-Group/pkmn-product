@@ -7,7 +7,7 @@
 .basket-container .order-sum-container {
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
   margin: 50px 0 75px;
   width: 50%;
   float: right;
@@ -57,7 +57,7 @@
 .basket-item .basket-item-price {
   display: flex;
   flex-direction: column-reverse;
-  align-items: end;
+  align-items: flex-end;
   float: bottom;
   margin-bottom: 20px;
 }

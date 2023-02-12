@@ -1,14 +1,9 @@
-import * as React from "react";
 import { useEffect, useState } from "react";
 
 const DEFAULT_OPTIONS = {
   config: { attributes: true, childList: true, subtree: true },
 };
-export function useMutationObservable(
-  targetEl: any,
-  cb: any,
-  options = DEFAULT_OPTIONS
-) {
+export function useMutationObservable(targetEl, cb, options = DEFAULT_OPTIONS) {
   const [observer, setObserver] = useState<MutationObserver>();
 
   useEffect(() => {
