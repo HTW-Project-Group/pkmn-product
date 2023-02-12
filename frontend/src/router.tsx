@@ -3,9 +3,10 @@ import { ThemeProvider } from "@mui/material";
 import App from "./Pages/App";
 import ProductDetailPage from "./Pages/ProductDetailPage";
 import SearchResultPage from "./Pages/SearchResultPage";
+import BasketPage from "./Pages/BasketPage";
+import CheckoutPage from "./Pages/CheckoutPage";
 import * as React from "react";
 import { theme } from "./theme";
-import BasketPage from "./Pages/BasketPage";
 
 export const router = createBrowserRouter([
   {
@@ -27,5 +28,9 @@ export const router = createBrowserRouter([
   {
     path: "basket",
     element: <BasketPage />,
+  },
+  {
+    path: "checkout",
+    element: <CheckoutPage />,
   },
 ]);

@@ -2,8 +2,11 @@ import { Button, Divider } from "@mui/material";
 import * as React from "react";
 import BasketItem from "../../Model/Basket";
 import BasketItemView from "./BasketItemView";
+import { useNavigate } from "react-router-dom";
 
 export default function BasketView() {
+  const navigate = useNavigate();
+
   const dummyItem = {
     name: "Necrozma GX",
     description:
@@ -27,7 +30,9 @@ export default function BasketView() {
         <span className="order-sum-value">
           {items.map((v) => v.price * v.quantity).reduce((a, b) => a + b)} €
         </span>
-        <Button variant="contained">Checkout</Button>
+        <Button variant="contained" onClick={() => navigate("/checkout")}>
+          Checkout
+        </Button>
       </div>
     </div>
   );
