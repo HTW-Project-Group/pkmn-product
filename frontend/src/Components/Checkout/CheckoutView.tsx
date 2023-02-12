@@ -1,7 +1,11 @@
-import { Box, Button, Divider, TextField } from "@mui/material";
 import * as React from "react";
+import { Box, Button, Divider, TextField } from "@mui/material";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useState } from "react";
 
 export default function CheckoutView() {
+  const [credentialsApproved, setCredentialsApproved] = useState(false);
+
   return (
     <div className="checkout-wrapper">
       <div className="checkout-container">
@@ -52,9 +56,37 @@ export default function CheckoutView() {
         </Box>
 
         <h2>Billing</h2>
-        <div className="billing-container"></div>
+        <div className="billing-container">
+          <PayPalScriptProvider
+            options={{ "client-id": "test", currency: "EUR" }}
+          >
+            <PayPalButtons
+              style={{ layout: "horizontal" }}
+              createOrder={(data, actions) => {
+                return actions.order.create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        value: "1474.99",
+                      },
+                    },
+                  ],
+                });
+              }}
+              onApprove={(data, actions) => {
+                return actions.order.capture().then(() => {
+                  setCredentialsApproved(true);
+                });
+              }}
+            />
+          </PayPalScriptProvider>
+        </div>
 
-        <Button className="buy-btn" variant="contained">
+        <Button
+          className="buy-btn"
+          variant="contained"
+          disabled={!credentialsApproved}
+        >
           Buy
         </Button>
       </div>
