@@ -1,24 +1,18 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { useEffect, useState } from "react";
-import Card from "../../Model/Card";
 import Pokemon from "../../Model/Pokemon";
 import AddToBasket from "../Basket/AddToBasket";
-
-let theme = createTheme();
-theme = responsiveFontSizes(theme);
+import Card from "../../Model/Card";
 
 export default function ProductDetails({
-  id,
-  name,
-  price,
-  description,
-  condition,
   pokemonId,
-}: Card) {
+}: {
+  pokemonId: string | undefined;
+}) {
   const initialEmptyPokemon = {} as Pokemon;
   const [pokemon, setPokemon] = useState<Pokemon>(initialEmptyPokemon);
+  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     const pokemonDetails = async () => {
@@ -48,7 +42,23 @@ export default function ProductDetails({
       return pokemon;
     };
     pokemonDetails().then((result) => setPokemon(result));
+
+
   }, [pokemonId]);
+
+  useEffect(() => {
+    const getProductByPokemonId = async () => {
+      const data = await fetch(
+        `http://localhost:8080/v1/products/pkmn/${pokemonId}`,
+        {
+          method: "GET",
+        }
+      );
+      return data.json();
+    };
+
+    getProductByPokemonId().then((result) => setPrice(result.price));
+  }, [pokemonId])
 
   return (
     <Box className="productDetail">
@@ -58,7 +68,7 @@ export default function ProductDetails({
           className="detailImage"
           src={
             "https://images.pokemontcg.io/" +
-            pokemonId.replaceAll("-", "/") +
+            pokemonId?.replaceAll("-", "/") +
             "_hires.png"
           }
         />

@@ -3,6 +3,7 @@ import InputBase from "@mui/material/InputBase";
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
+import {formatPrice} from "../../Helper/Format";
 
 export default function AddToBasket({ price }: { price: number }) {
   const [amount, setAmount] = useState<number>(1);
@@ -24,7 +25,7 @@ export default function AddToBasket({ price }: { price: number }) {
         sx={{ width: "3em", fontSize: "1.5em" }}
       />
       <Typography fontSize={"20px"} fontWeight={"bold"} className="detailPrice">
-        {price}€
+        {formatPrice(price)}
       </Typography>
 
       <Button fullWidth={true} variant={"contained"}>

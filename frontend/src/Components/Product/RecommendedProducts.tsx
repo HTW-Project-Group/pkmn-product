@@ -6,6 +6,7 @@ import Card from "../../Model/Card";
 import CardView from "./CardView";
 
 export default function RecommendedProducts() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -30,12 +31,6 @@ export default function RecommendedProducts() {
     productList().then((result) => setProducts(result));
   }, []);
 
-  const navigate = useNavigate();
-  const routeChange = (card: Card) => {
-    const path = `/details`;
-    navigate(path, { state: card });
-  };
-
   return (
     <Box className="recommended-products">
       <Box className="header disable-select">
@@ -51,7 +46,7 @@ export default function RecommendedProducts() {
           <Box
             key={item.pokemonId}
             className="card"
-            onClick={() => routeChange(item)}
+            onClick={() => navigate(`/details/${item.pokemonId}`)}
             data-cy="card"
           >
             <CardView
