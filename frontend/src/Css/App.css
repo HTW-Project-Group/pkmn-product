@@ -120,3 +120,42 @@
     --card-count: 2;
   }
 }
+
+.banner {
+  position: relative;
+  width: 75%;
+  padding: 10px 25% 10px 25px;
+  overflow: hidden;
+  margin: 35px 0;
+  border-radius: 5px;
+}
+.banner * {
+  color: #fff;
+  text-shadow: 2px 2px #0004;
+}
+.banner::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: 0;
+  top: 0;
+  border-style: solid;
+  border-width: 0 0 200px 200px;
+  border-color: transparent transparent #fff transparent;
+}
+.banner.red {
+  background: var(--color-error);
+  background: linear-gradient(135deg, var(--color-error) 0%, rgba(255,255,255,1) 95%);
+}
+.banner.blue {
+  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary) 0%, rgba(255,255,255,1) 95%);
+}
+.banner.reverse {
+  transform: scaleX(-1);
+}
+.banner.reverse > * {
+  transform: scaleX(-1);
+  text-align: right;
+}
