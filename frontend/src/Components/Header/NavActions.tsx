@@ -7,7 +7,7 @@ import { AccountCircle } from "@mui/icons-material";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import { useNavigate } from "react-router-dom";
 
-const settings = ["Account", "Logout"];
+const settings = ["Account", "Logout", "Login"];
 
 export default function NavActions() {
   const navigate = useNavigate();
@@ -19,7 +19,20 @@ export default function NavActions() {
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
+    console.log(setting);
+
+    if (setting == "Login") {
+      window.location.replace(
+        "http://localhost:8180/realms/pokemon/protocol/openid-connect/auth?response_type=code&client_id=pokemonClient&redirect_uri=" +
+          window.location.href
+      );
+    } else if (setting == "Logout") {
+      window.location.replace(
+        `http://localhost:8180/realms/pokemon/protocol/openid-connect/logout?redirect_uri=` +
+          window.location.href
+      );
+    }
     setAnchorElUser(null);
   };
 
@@ -61,7 +74,10 @@ export default function NavActions() {
           onClose={handleCloseUserMenu}
         >
           {settings.map((setting) => (
-            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+            <MenuItem
+              key={setting}
+              onClick={() => handleCloseUserMenu(setting)}
+            >
               <Typography textAlign="center">{setting}</Typography>
             </MenuItem>
           ))}
