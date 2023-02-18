@@ -1,4 +1,4 @@
-package de.htwberlin.port.product;
+package de.htwberlin.port.product.controller;
 
 import de.htwberlin.core.appservice.dto.ProductDto;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/queue")
 public class QueueController {
 
-    @PostMapping("/basket/add")
-    public ResponseEntity<ProductDto> addProductToBasketQueue() {
-        return null;
-    }
+  @PostMapping("/basket/add")
+  public ResponseEntity<ProductDto> addProductToBasketQueue() {
+    return null;
+  }
 }

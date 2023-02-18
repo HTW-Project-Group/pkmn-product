@@ -1,4 +1,4 @@
-package de.htwberlin.port.product;
+package de.htwberlin.port.product.controller;
 
 import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.domain.service.IProductService;
