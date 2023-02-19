@@ -21,7 +21,14 @@ export default function BasketItemView({ item }: { item: BasketItem }) {
   return (
     <div className="basket-item">
       <div className="basket-item-img">
-        <img src={item.img} alt="Pokemon Image" />
+        <img
+          src={
+            "https://images.pokemontcg.io/" +
+            item.pokemonId.replaceAll("-", "/") +
+            ".png"
+          }
+          alt="Pokemon Image"
+        />
       </div>
       <div className="basket-item-content">
         <h2>{item.name}</h2>

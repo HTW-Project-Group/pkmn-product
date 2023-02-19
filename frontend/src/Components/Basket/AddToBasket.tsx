@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   FormControl,
@@ -10,8 +10,25 @@ import {
 import { formatPrice } from "../../Helper/Format";
 import Card from "../../Model/Card";
 import ProductDto from "../../Model/ProductDto";
+import { useKeycloak } from "@react-keycloak/web";
+import KeycloakHandler from "../../Helper/KeycloakHandler";
 
 export default function AddToBasket({ product }: { product: Card }) {
+  const { keycloak } = useKeycloak();
+  const [userInfo, setUserInfo] = useState<any>({});
+
+  useEffect(() => {
+    KeycloakHandler.instance()
+      .onKeycloakLoaded()
+      .then(() => {
+        keycloak.loadUserInfo().then((userResponse) => {
+          setUserInfo(userResponse);
+          console.log(userResponse);
+        });
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   const [quantity, setQuantity] = useState(1);
 
   const quantityChange = (e) => {
@@ -19,21 +36,23 @@ export default function AddToBasket({ product }: { product: Card }) {
   };
 
   const addToBasketRequest = () => {
-    fetch(`http://localhost:8080/v1/queue/basket/add`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: "00000000-0000-0000-0000-000000000000",
-        pokemonId: product.pokemonId,
-        name: product.name,
-        description: product.description,
-        quantity,
-        price: product.price,
-      } as ProductDto),
-    });
+    if (userInfo) {
+      return fetch(`http://localhost:8080/v1/queue/basket/add`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userInfo.sub,
+          pokemonId: product.pokemonId,
+          name: product.name,
+          description: product.description,
+          quantity,
+          price: product.price,
+        } as ProductDto),
+      });
+    }
   };
 
   return (
