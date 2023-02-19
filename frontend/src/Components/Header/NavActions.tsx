@@ -6,11 +6,22 @@ import MenuItem from "@mui/material/MenuItem";
 import { AccountCircle } from "@mui/icons-material";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import { useNavigate } from "react-router-dom";
-
-const settings = ["Account", "Logout", "Login"];
+import { useKeycloak } from "@react-keycloak/web";
+import { useEffect } from "react";
+import KeycloakHandler from "../../Helper/KeycloakHandler";
 
 export default function NavActions() {
   const navigate = useNavigate();
+
+  const { keycloak } = useKeycloak();
+
+  useEffect(() => {
+    KeycloakHandler.instance()
+      .onKeycloakLoaded()
+      .then(() => {
+        keycloak.loadUserInfo().then((userInfo) => console.log(userInfo));
+      });
+  }, []);
 
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -19,21 +30,21 @@ export default function NavActions() {
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
-  const handleCloseUserMenu = (setting) => {
-    console.log(setting);
-
-    if (setting == "Login") {
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+  const handleLoginLogout = (authenticated) => {
+    if (!authenticated) {
       window.location.replace(
         "http://localhost:8180/realms/pokemon/protocol/openid-connect/auth?response_type=code&client_id=pokemonClient&redirect_uri=" +
           window.location.href
       );
-    } else if (setting == "Logout") {
+    } else {
       window.location.replace(
         `http://localhost:8180/realms/pokemon/protocol/openid-connect/logout?redirect_uri=` +
           window.location.href
       );
     }
-    setAnchorElUser(null);
   };
 
   return (
@@ -73,14 +84,11 @@ export default function NavActions() {
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}
         >
-          {settings.map((setting) => (
-            <MenuItem
-              key={setting}
-              onClick={() => handleCloseUserMenu(setting)}
-            >
-              <Typography textAlign="center">{setting}</Typography>
-            </MenuItem>
-          ))}
+          <MenuItem onClick={() => handleLoginLogout(keycloak.authenticated)}>
+            <Typography textAlign="center">
+              {keycloak.authenticated ? "Logout" : "Login"}
+            </Typography>
+          </MenuItem>
         </Menu>
       </Box>
     </Box>
