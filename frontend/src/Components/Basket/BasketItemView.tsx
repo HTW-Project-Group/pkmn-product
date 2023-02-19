@@ -9,19 +9,69 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { formatPrice, formatWithMaxLen } from "../../Helper/Format";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Basket from "../../Model/Basket";
 
-export default function BasketItemView({ item }: { item: BasketItem }) {
+export default function BasketItemView({
+  item,
+  onUpdate,
+}: {
+  item: BasketItem;
+  onUpdate(basket: Basket): void;
+}) {
   const [quantity, setQuantity] = useState(item.quantity);
 
   const quantityChange = (e) => {
-    setQuantity(e.target.value);
+    const newQuantity = e.target.value;
+    setQuantity(newQuantity);
+
+    const updateBasketItem = async () => {
+      const data = await fetch(`http://localhost:8081/v1/basket/update`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: item.id,
+          userId: item.userId,
+          pokemonId: item.pokemonId,
+          name: item.name,
+          description: item.description,
+          quantity: newQuantity,
+          price: item.price,
+        } as BasketItem),
+      });
+      return data.json();
+    };
+
+    updateBasketItem().then((basket) => onUpdate(basket));
+  };
+
+  const removeBasketItem = () => {
+    const remove = async () => {
+      const data = await fetch(
+        `http://localhost:8081/v1/basket/delete/${item.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      return data.json();
+    };
+    remove().then((basket) => onUpdate(basket));
   };
 
   return (
     <div className="basket-item">
       <div className="basket-item-img">
-        <img src={item.img} alt="Pokemon Image" />
+        <img
+          src={
+            "https://images.pokemontcg.io/" +
+            item.pokemonId.replaceAll("-", "/") +
+            ".png"
+          }
+          alt="Pokemon Image"
+        />
       </div>
       <div className="basket-item-content">
         <h2>{item.name}</h2>
@@ -51,6 +101,7 @@ export default function BasketItemView({ item }: { item: BasketItem }) {
             color="error"
             startIcon={<DeleteIcon />}
             sx={{ height: 40 }}
+            onClick={removeBasketItem}
           >
             Remove
           </Button>

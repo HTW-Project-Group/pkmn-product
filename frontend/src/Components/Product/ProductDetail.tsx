@@ -156,7 +156,7 @@ export default function ProductDetails({
       <p>{product.description}</p>
 
       <div className="add-to-basket-container">
-        <AddToBasket price={product.price} />
+        <AddToBasket product={product} />
       </div>
     </div>
   );

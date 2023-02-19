@@ -1,6 +1,7 @@
 export default interface BasketItem {
   id: string;
-  productId: string;
+  userId: string;
+  pokemonId: string;
   name: string;
   description: string;
   img: string;

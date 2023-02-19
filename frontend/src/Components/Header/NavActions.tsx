@@ -7,20 +7,35 @@ import { AccountCircle } from "@mui/icons-material";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import { useNavigate } from "react-router-dom";
 import { useKeycloak } from "@react-keycloak/web";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import KeycloakHandler from "../../Helper/KeycloakHandler";
+import Basket from "../../Model/Basket";
 
 export default function NavActions() {
   const navigate = useNavigate();
 
   const { keycloak } = useKeycloak();
+  const [basket, setBasket] = useState({ items: [] } as Basket);
 
   useEffect(() => {
+    const getBasket = async (userId) => {
+      const data = await fetch(
+        `http://localhost:8081/v1/basket/user/${userId}`,
+        {
+          method: "GET",
+        }
+      );
+      return data.json();
+    };
+
     KeycloakHandler.instance()
       .onKeycloakLoaded()
       .then(() => {
-        keycloak.loadUserInfo().then((userInfo) => console.log(userInfo));
-      });
+        keycloak.loadUserInfo().then((userResponse: any) => {
+          getBasket(userResponse.sub).then((basket) => setBasket(basket));
+        });
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -56,9 +71,13 @@ export default function NavActions() {
             aria-label="add to shopping cart"
             onClick={() => navigate("/basket")}
           >
-            <Badge badgeContent={4} color="error">
+            {basket.items && basket.items?.length !== 0 ? (
+              <Badge badgeContent={basket.items?.length} color="error">
+                <LocalGroceryStoreIcon />
+              </Badge>
+            ) : (
               <LocalGroceryStoreIcon />
-            </Badge>
+            )}
           </IconButton>
         </Tooltip>
       </Box>
