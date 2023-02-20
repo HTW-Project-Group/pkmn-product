@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { formatPrice, formatWithMaxLen } from "../../Helper/Format";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Basket from "../../Model/Basket";
 
 export default function BasketItemView({
@@ -26,7 +26,7 @@ export default function BasketItemView({
     setQuantity(newQuantity);
 
     const updateBasketItem = async () => {
-      const data = await fetch(`http://localhost:8081/v1/basket/update`, {
+      const data = await fetch(`http://localhost:8080/v1/basket/update`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -51,7 +51,7 @@ export default function BasketItemView({
   const removeBasketItem = () => {
     const remove = async () => {
       const data = await fetch(
-        `http://localhost:8081/v1/basket/delete/${item.id}`,
+        `http://localhost:8080/v1/basket/delete/${item.id}`,
         {
           method: "DELETE",
         }

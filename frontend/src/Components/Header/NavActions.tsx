@@ -20,7 +20,7 @@ export default function NavActions() {
   useEffect(() => {
     const getBasket = async (userId) => {
       const data = await fetch(
-        `http://localhost:8081/v1/basket/user/${userId}`,
+        `http://localhost:8080/v1/basket/user/${userId}`,
         {
           method: "GET",
         }
