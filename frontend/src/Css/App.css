@@ -14,6 +14,7 @@
   width: 100%;
 }
 .search-bar > .search-filter {
+  display: none; /* disabled feature */
   position: absolute;
   right: 0;
 }

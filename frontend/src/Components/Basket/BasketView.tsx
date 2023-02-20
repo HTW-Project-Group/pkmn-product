@@ -12,7 +12,6 @@ export default function BasketView() {
   const navigate = useNavigate();
 
   const { keycloak } = useKeycloak();
-  const [userInfo, setUserInfo] = useState<any>({});
   const [basket, setBasket] = useState({ items: [] } as Basket);
 
   useEffect(() => {
@@ -30,7 +29,6 @@ export default function BasketView() {
       .onKeycloakLoaded()
       .then(() => {
         keycloak.loadUserInfo().then((userResponse: any) => {
-          setUserInfo(userResponse);
           console.log(userResponse);
 
           getBasket(userResponse.sub).then((basket) => setBasket(basket));

@@ -5,8 +5,8 @@ export default function PaymentSuccesfulView() {
     <div className="paymentsuccess-wrapper">
       <img alt="paymentsuccess picture" src="/img/teamrocket.png" />
       <p>
-        Die Zahlung war erfolgreich. Die Karten werden Sie nicht erhalten,
-        stattdessen kriegen Sie hier einen Keks 🍪. - Team Rocket
+        The payment was successful. You will not receive your cards, instead you
+        will get a cookie 🍪. - Team Rocket
       </p>
     </div>
   );
