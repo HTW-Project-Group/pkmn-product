@@ -2,7 +2,7 @@ import * as React from 'react'
 import ProductDetail from "../../src/Components/Product/ProductDetail"
 import Card from "../../src/Model/Card"
 
-describe('Header.cy.ts', () => {
+describe('ProductDetail.cy.ts', () => {
     it('renders a pokemons details', () => {
         const productMock: Card = {
             condition: 10,
@@ -71,6 +71,10 @@ describe('Header.cy.ts', () => {
                 artist: "kawayoo",
                 rarity: "Rare Ultra"
             }
+        })
+        // Ignore Exceptions from Keycloak, because it is not necessary here
+        cy.on('uncaught:exception', () => {
+            return false
         })
     })
 })

@@ -48,6 +48,11 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
         <!-- DB-->
         <dependency>
@@ -66,6 +71,11 @@
         </dependency>
 
         <!-- Misc-->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.16.0</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

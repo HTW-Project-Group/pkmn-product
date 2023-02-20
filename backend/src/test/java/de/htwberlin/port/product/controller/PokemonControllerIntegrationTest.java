@@ -1,4 +1,4 @@
-package de.htwberlin.port.product;
+package de.htwberlin.port.product.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;

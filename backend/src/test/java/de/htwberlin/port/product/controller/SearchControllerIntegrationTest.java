@@ -1,4 +1,4 @@
-package de.htwberlin.port.product;
+package de.htwberlin.port.product.controller;
 
 import static java.util.Map.entry;
 import static org.hamcrest.Matchers.containsString;

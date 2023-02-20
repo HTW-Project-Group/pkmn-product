@@ -1,4 +1,4 @@
-package de.htwberlin.port.product;
+package de.htwberlin.port.product.controller;
 
 import de.htwberlin.core.domain.model.Pokemon;
 import de.htwberlin.core.domain.service.IPokemonService;
