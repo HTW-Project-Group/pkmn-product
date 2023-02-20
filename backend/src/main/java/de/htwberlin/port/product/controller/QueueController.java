@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@CrossOrigin
 @RestController
 @RequestMapping("/v1/queue")
 public class QueueController {
