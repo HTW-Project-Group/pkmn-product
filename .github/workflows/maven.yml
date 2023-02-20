@@ -70,7 +70,7 @@ jobs:
         env:
           SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_KEY }}
         with:
-          source-directory: api-gateway/
+          source-directory: pkmn-api-gateway/
           destination-github-username: 'HTW-Project-Group'
           destination-repository-name: 'pkmn-api-gateway'
           user-email: github-actions@github.com
