@@ -37,7 +37,7 @@ export default function AddToBasket({ product }: { product: Card }) {
 
   const addToBasketRequest = () => {
     if (userInfo) {
-      return fetch(`http://localhost:8080/v1/queue/basket/add`, {
+      return fetch(`http://localhost:8080/v1/product/queue/basket/add`, {
         method: "POST",
         headers: {
           Accept: "application/json",

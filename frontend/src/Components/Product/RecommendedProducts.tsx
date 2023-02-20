@@ -11,7 +11,7 @@ export default function RecommendedProducts() {
 
   useEffect(() => {
     const productList = async () => {
-      const data = await fetch("http://localhost:8080/v1/products?amount=8", {
+      const data = await fetch("http://localhost:8080/v1/product?amount=8", {
         method: "GET",
       });
       const jsonData = await data.json();

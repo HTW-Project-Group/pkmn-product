@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/products")
+@RequestMapping("/v1/product")
 public class ProductController {
 
   private final IProductService productService;

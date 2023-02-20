@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/search")
+@RequestMapping("/v1/product/search")
 public class SearchController {
 
   private final ISearchService searchService;

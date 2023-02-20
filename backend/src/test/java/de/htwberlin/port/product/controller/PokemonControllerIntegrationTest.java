@@ -32,7 +32,7 @@ class PokemonControllerIntegrationTest {
   @Test
   void shouldReturnPokemonWithGivenIdThenStatus200() throws Exception {
     // given + when
-    mvc.perform(get("/v1/pokemon/swsh9-166"))
+    mvc.perform(get("/v1/product/pokemon/swsh9-166"))
 
         // then
         .andExpect(status().isOk())

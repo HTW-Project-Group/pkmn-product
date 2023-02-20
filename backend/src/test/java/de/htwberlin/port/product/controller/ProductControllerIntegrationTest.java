@@ -52,7 +52,7 @@ class ProductControllerIntegrationTest {
   @Test
   void shouldReturnAllProductsThenStatus200() throws Exception {
     // given + when
-    mvc.perform(get("/v1/products"))
+    mvc.perform(get("/v1/product"))
 
         // then
         .andExpect(status().isOk())
@@ -63,7 +63,7 @@ class ProductControllerIntegrationTest {
   @Test
   void shouldReturnProductByIdThenStatus200() throws Exception {
     // given + when
-    mvc.perform(get("/v1/products/00000000-0000-0000-0000-000000000000"))
+    mvc.perform(get("/v1/product/00000000-0000-0000-0000-000000000000"))
 
         // then
         .andExpect(status().isOk())
@@ -74,7 +74,7 @@ class ProductControllerIntegrationTest {
   @Test
   void shouldReturnProductByPokemonIdThenStatus200() throws Exception {
     // given + when
-    mvc.perform(get("/v1/products/pkmn/basep-4"))
+    mvc.perform(get("/v1/product/pkmn/basep-4"))
 
         // then
         .andExpect(status().isOk())
@@ -98,7 +98,7 @@ class ProductControllerIntegrationTest {
 
     // when
     mvc.perform(
-            post("/v1/products/new").contentType(MediaType.APPLICATION_JSON).content(productJson))
+            post("/v1/product/new").contentType(MediaType.APPLICATION_JSON).content(productJson))
 
         // then
         .andExpect(status().isCreated())
@@ -116,7 +116,7 @@ class ProductControllerIntegrationTest {
 
     // when
     mvc.perform(
-            put("/v1/products/00000000-0000-0000-0000-000000000000/edit")
+            put("/v1/product/00000000-0000-0000-0000-000000000000/edit")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(productJson))
 

@@ -16,7 +16,7 @@ export default function ProductDetails({
   useEffect(() => {
     const pokemonDetails = async () => {
       const data = await fetch(
-        "http://localhost:8080/v1/pokemon/" + pokemonId,
+        "http://localhost:8080/v1/product/pokemon/" + pokemonId,
         {
           method: "GET",
         }
@@ -46,7 +46,7 @@ export default function ProductDetails({
   useEffect(() => {
     const getProductByPokemonId = async () => {
       const data = await fetch(
-        `http://localhost:8080/v1/products/pkmn/${pokemonId}`,
+        `http://localhost:8080/v1/product/pkmn/${pokemonId}`,
         {
           method: "GET",
         }

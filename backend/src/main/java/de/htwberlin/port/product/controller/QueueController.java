@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/queue")
+@RequestMapping("/v1/product/queue")
 public class QueueController {
 
   private final ProductProducer productProducer;

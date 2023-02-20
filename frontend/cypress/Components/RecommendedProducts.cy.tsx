@@ -22,7 +22,7 @@ describe('RecommendedProducts.cy.ts', () => {
 
         const productMockArray: Card[] = new Array(7).fill(productMock);
 
-        cy.intercept('GET', '/v1/products?amount=8', {
+        cy.intercept('GET', '/v1/product?amount=8', {
             body: productMockArray
         })
         cy.get('[data-cy="card"]').first().click();

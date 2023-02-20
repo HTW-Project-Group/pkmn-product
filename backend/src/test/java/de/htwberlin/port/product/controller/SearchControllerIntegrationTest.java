@@ -70,7 +70,7 @@ class SearchControllerIntegrationTest {
     var search = "name:Char";
 
     // when
-    mvc.perform(get("/v1/search/" + search))
+    mvc.perform(get("/v1/product/search/" + search))
 
         // then
         .andExpect(status().isOk())
@@ -87,7 +87,7 @@ class SearchControllerIntegrationTest {
     var search = "name:Charmander;types:Fire";
 
     // when
-    mvc.perform(get("/v1/search/" + search))
+    mvc.perform(get("/v1/product/search/" + search))
 
         // then
         .andExpect(status().isOk())
@@ -104,7 +104,7 @@ class SearchControllerIntegrationTest {
     var pageSize = 2;
 
     // when
-    mvc.perform(get("/v1/search/" + search + "/" + page + "/" + pageSize))
+    mvc.perform(get("/v1/product/search/" + search + "/" + page + "/" + pageSize))
 
         // then
         .andExpect(status().isOk())
@@ -118,7 +118,7 @@ class SearchControllerIntegrationTest {
     var search = "garbage 123";
 
     // when
-    mvc.perform(get("/v1/search/" + search))
+    mvc.perform(get("/v1/product/search/" + search))
 
         // then
         .andExpect(status().isOk())

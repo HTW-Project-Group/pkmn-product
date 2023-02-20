@@ -46,9 +46,12 @@ export default function SearchResults() {
   const [products, setProducts] = useState([]);
 
   const productList = async (q) => {
-    const data = await fetch(`http://localhost:8080/v1/search/name%3A${q}`, {
-      method: "GET",
-    });
+    const data = await fetch(
+      `http://localhost:8080/v1/product/search/name%3A${q}`,
+      {
+        method: "GET",
+      }
+    );
     const jsonData = await data.json();
     return jsonData.map((data) => {
       const card: Card = {
