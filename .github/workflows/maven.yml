@@ -56,12 +56,12 @@ jobs:
       - name: Setup Git env
         uses: actions/checkout@v3
         with:
+          repository: HTW-Project-Group/pkmn-api-gateway
           token: ${{ secrets.WORKFLOW_DEPLOY_KEY }}
       - name: Deploy to Api Gateway
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git clone git@github.com:HTW-Project-Group/pkmn-api-gateway.git
           mkdir -p pkmn-api-gateway/deployment/product
           cp backend/target/*.jar pkmn-api-gateway/deployment/product/
           git add .
