@@ -37,6 +37,7 @@ jobs:
       run: mvn test package --file pom.xml -ntp
   deploy:
     runs-on: ubuntu-latest
+    needs: [build, test]
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -52,7 +53,7 @@ jobs:
           cd backend
           mvn -B package --file pom.xml -DskipTests -ntp
           cd ..
-          mkdir deployment/product
+          mkdir -p deployment/product
           cp backend/target/*.jar deployment/product/
       - name: Deploy to Api Gateway
         id: push_directory
