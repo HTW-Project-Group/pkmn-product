@@ -2,9 +2,11 @@ import * as React from "react";
 import { Box, Button, Divider, TextField } from "@mui/material";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CheckoutView() {
   const [credentialsApproved, setCredentialsApproved] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="checkout-wrapper">
@@ -86,6 +88,7 @@ export default function CheckoutView() {
           className="buy-btn"
           variant="contained"
           disabled={!credentialsApproved}
+          onClick={() => navigate("/paymentsuccessful")}
         >
           Buy
         </Button>

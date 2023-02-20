@@ -1,0 +1,11 @@
+.paymentsuccess-wrapper {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+}
+
+p {
+    font-size: 18px;
+}
