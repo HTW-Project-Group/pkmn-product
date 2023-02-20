@@ -53,18 +53,15 @@ jobs:
           cd backend
           mvn -B package --file pom.xml -DskipTests -ntp
           cd ..
-          mkdir -p api-gateway/deployment/product
-          cp backend/target/*.jar api-gateway/deployment/product/
       - name: Deploy to Api Gateway
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_KEY }}
-          TMPDIR: api-gateway/
-        with:
-          source-directory: api-gateway/
-          destination-github-username: 'HTW-Project-Group'
-          destination-repository-name: 'pkmn-api-gateway'
-          user-email: deploy@github.com
-          commit-message: Deployed from $GITHUB_REF
-          target-branch: master
+        uses: actions/checkout@v3
+        run: |
+          ssh-add - <<< '${{ secrets.WORKFLOW_DEPLOY_KEY }}'
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git clone git@github.com:HTW-Project-Group/pkmn-api-gateway.git
+          mkdir -p pkmn-api-gateway/deployment/product
+          cp backend/target/*.jar pkmn-api-gateway/deployment/product/
+          git add .
+          git commit -m "Deployed from $GITHUB_JOB"
+          git push
