@@ -1,17 +1,27 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import {
+  AlertProps,
   Button,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
+  Snackbar,
 } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import { formatPrice } from "../../Helper/Format";
 import Card from "../../Model/Card";
 import ProductDto from "../../Model/ProductDto";
 import { useKeycloak } from "@react-keycloak/web";
 import KeycloakHandler from "../../Helper/KeycloakHandler";
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function AddToBasket({ product }: { product: Card }) {
   const { keycloak } = useKeycloak();
@@ -35,6 +45,18 @@ export default function AddToBasket({ product }: { product: Card }) {
     setQuantity(e.target.value);
   };
 
+  const [showSnackbar, setShowSnackbar] = useState(false);
+
+  const handleSnackbarClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackbar(false);
+  };
+
   const addToBasketRequest = () => {
     if (userInfo) {
       return fetch(`http://localhost:8080/v1/product/queue/basket/add`, {
@@ -51,6 +73,8 @@ export default function AddToBasket({ product }: { product: Card }) {
           quantity,
           price: product.price,
         } as ProductDto),
+      }).then(() => {
+        setShowSnackbar(true);
       });
     }
   };
@@ -85,6 +109,19 @@ export default function AddToBasket({ product }: { product: Card }) {
           </Select>
         </FormControl>
       </div>
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="info"
+          sx={{ width: "100%" }}
+        >
+          {product.name} was added to basket
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

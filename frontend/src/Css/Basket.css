@@ -78,3 +78,6 @@
 .basket-item .basket-item-price .quantity {
   color: var(--color-grey);
 }
+[class*=MuiAlert-filledInfo] {
+  background-color: var(--color-primary) !important;
+}
