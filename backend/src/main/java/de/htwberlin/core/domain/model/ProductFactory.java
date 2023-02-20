@@ -1,7 +1,6 @@
-package de.htwberlin.core.appservice.dto;
+package de.htwberlin.core.domain.model;
 
 import com.github.javafaker.Faker;
-import de.htwberlin.core.domain.model.PokemonIdNamePair;
 import de.htwberlin.port.adapter.CsvAdapter;
 import java.util.List;
 import java.util.Locale;
@@ -15,9 +14,9 @@ public class ProductFactory {
   private static final Faker faker = new Faker(Locale.GERMAN);
   private static List<PokemonIdNamePair> pokemons = null;
 
-  public static ProductDto.ProductDtoBuilder simpleProduct() {
+  public static Product.ProductBuilder simpleProduct() {
     var builder =
-        ProductDto.builder()
+        Product.builder()
             .id(UUID.randomUUID())
             .price(faker.number().randomDouble(2, 100, 1000))
             .description(faker.lorem().sentence(100))

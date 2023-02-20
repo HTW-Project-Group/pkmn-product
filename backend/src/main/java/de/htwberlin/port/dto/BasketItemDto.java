@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductExportDto implements Serializable {
+public class BasketItemDto implements Serializable {
 
   UUID userId;
 

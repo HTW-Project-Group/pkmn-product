@@ -1,8 +1,7 @@
 package de.htwberlin.core.domain.service.impl;
 
-import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.appservice.mapper.AttributeMapper;
-import de.htwberlin.core.appservice.mapper.IProductMapper;
+import de.htwberlin.core.domain.model.Product;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.service.IProductService;
 import de.htwberlin.port.exception.ProductNotFoundException;
@@ -23,49 +22,46 @@ import org.springframework.validation.annotation.Validated;
 public class ProductService implements IProductService {
 
   private final IProductRepository productRepository;
-  private final IProductMapper productMapper;
-  private final AttributeMapper<ProductDto> attributeMapper;
+  private final AttributeMapper<Product> attributeMapper;
 
   @Override
-  public List<ProductDto> findAllProducts() {
-    return productRepository.findAll().stream().map(productMapper::toDto).toList();
+  public List<Product> findAllProducts() {
+    return productRepository.findAll();
   }
 
   @Override
-  public List<ProductDto> findCertainAmountOfProducts(int amount) {
-    List<ProductDto> result = new ArrayList<>();
+  public List<Product> findCertainAmountOfProducts(int amount) {
+    List<Product> result = new ArrayList<>();
     long amountInRepository = productRepository.count();
     for (int i = 0; i < amount; i++) {
       int index = (int) (Math.random() * amountInRepository);
-      var entity = productRepository.findAll(PageRequest.of(index, 1)).map(productMapper::toDto);
+      var entity = productRepository.findAll(PageRequest.of(index, 1));
       result.add(entity.getContent().get(0));
     }
     return result;
   }
 
   @Override
-  public Optional<ProductDto> findProductById(UUID id) {
-    final var entity = productRepository.findProductById(id);
-    return entity.map(productMapper::toDto);
+  public Optional<Product> findProductById(UUID id) {
+    return productRepository.findProductById(id);
   }
 
   @Override
-  public Optional<ProductDto> findProductByPokemonId(String id) {
-    final var entity = productRepository.findProductByPokemonId(id);
-    return entity.map(productMapper::toDto);
+  public Optional<Product> findProductByPokemonId(String id) {
+    return productRepository.findProductByPokemonId(id);
   }
 
   @Override
-  public ProductDto createProduct(ProductDto dto) {
-    productRepository.save(productMapper.toEntity(dto));
-    return dto;
+  public Product createProduct(Product product) {
+    productRepository.save(product);
+    return product;
   }
 
   @Override
-  public ProductDto updateProduct(ProductDto dto, UUID id) {
+  public Product updateProduct(Product product, UUID id) {
     var oldProduct = findProductById(id).orElseThrow(ProductNotFoundException::new);
-    var newProduct = attributeMapper.copyAttributes(oldProduct, dto);
-    productRepository.save(productMapper.toEntity(newProduct));
+    var newProduct = attributeMapper.copyAttributes(oldProduct, product);
+    productRepository.save(newProduct);
     return newProduct;
   }
 }

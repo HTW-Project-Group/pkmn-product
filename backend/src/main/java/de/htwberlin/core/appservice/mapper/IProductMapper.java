@@ -1,7 +1,7 @@
 package de.htwberlin.core.appservice.mapper;
 
-import de.htwberlin.core.appservice.dto.ProductDto;
 import de.htwberlin.core.domain.model.Product;
+import de.htwberlin.port.dto.ProductDto;
 import java.util.List;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;

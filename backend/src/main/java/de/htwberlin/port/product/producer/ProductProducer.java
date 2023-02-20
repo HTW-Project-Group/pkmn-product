@@ -1,6 +1,6 @@
 package de.htwberlin.port.product.producer;
 
-import de.htwberlin.port.dto.ProductExportDto;
+import de.htwberlin.port.dto.BasketItemDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -20,7 +20,7 @@ public class ProductProducer {
 
   private final RabbitTemplate rabbitTemplate;
 
-  public void sendProduct(ProductExportDto product) {
+  public void sendProduct(BasketItemDto product) {
     log.info(String.format("Product sent -> %s", product.getPokemonId()));
     rabbitTemplate.convertAndSend(exchange, routingKey, product);
   }

@@ -1,4 +1,4 @@
-package de.htwberlin.core.appservice.dto;
+package de.htwberlin.port.dto;
 
 import java.util.UUID;
 import lombok.AllArgsConstructor;

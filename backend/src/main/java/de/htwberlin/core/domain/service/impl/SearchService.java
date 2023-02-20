@@ -1,6 +1,6 @@
 package de.htwberlin.core.domain.service.impl;
 
-import de.htwberlin.core.appservice.dto.ProductDto;
+import de.htwberlin.core.domain.model.Product;
 import de.htwberlin.core.domain.model.SearchParam;
 import de.htwberlin.core.domain.service.IPokemonService;
 import de.htwberlin.core.domain.service.IProductService;
@@ -21,19 +21,18 @@ public class SearchService implements ISearchService {
   private final IPokemonService pokemonService;
 
   @Override
-  public List<ProductDto> searchForProducts(List<SearchParam> params)
-      throws InvalidSearchException {
+  public List<Product> searchForProducts(List<SearchParam> params) throws InvalidSearchException {
     return searchForProducts(params, 1, 250);
   }
 
   @Override
-  public List<ProductDto> searchForProducts(List<SearchParam> params, int page)
+  public List<Product> searchForProducts(List<SearchParam> params, int page)
       throws InvalidSearchException {
     return searchForProducts(params, page, 250);
   }
 
   @Override
-  public List<ProductDto> searchForProducts(List<SearchParam> params, int page, int pageSize)
+  public List<Product> searchForProducts(List<SearchParam> params, int page, int pageSize)
       throws InvalidSearchException {
     if (pageSize > 250) {
       throw new InvalidSearchException("The max Page Size is 250");

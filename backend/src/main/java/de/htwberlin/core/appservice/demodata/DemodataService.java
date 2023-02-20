@@ -1,6 +1,6 @@
 package de.htwberlin.core.appservice.demodata;
 
-import de.htwberlin.core.appservice.dto.ProductFactory;
+import de.htwberlin.core.domain.model.ProductFactory;
 import de.htwberlin.core.domain.service.IProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

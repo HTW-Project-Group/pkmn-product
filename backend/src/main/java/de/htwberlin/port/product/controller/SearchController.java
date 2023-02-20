@@ -1,6 +1,6 @@
 package de.htwberlin.port.product.controller;
 
-import de.htwberlin.core.appservice.dto.ProductDto;
+import de.htwberlin.core.domain.model.Product;
 import de.htwberlin.core.domain.model.SearchParam;
 import de.htwberlin.core.domain.service.ISearchService;
 import java.util.Arrays;
@@ -19,13 +19,13 @@ public class SearchController {
   private final ISearchService searchService;
 
   @GetMapping("/{query}")
-  public ResponseEntity<List<ProductDto>> searchProducts(@PathVariable("query") String query) {
+  public ResponseEntity<List<Product>> searchProducts(@PathVariable("query") String query) {
     return new ResponseEntity<>(
         searchService.searchForProducts(getSearchParamsFromQuery(query)), HttpStatus.OK);
   }
 
   @GetMapping("/{query}/{page}")
-  public ResponseEntity<List<ProductDto>> searchProducts(
+  public ResponseEntity<List<Product>> searchProducts(
       @PathVariable("query") String query, @PathVariable("page") int page) {
 
     return new ResponseEntity<>(
@@ -33,7 +33,7 @@ public class SearchController {
   }
 
   @GetMapping("/{query}/{page}/{pageSize}")
-  public ResponseEntity<List<ProductDto>> searchProducts(
+  public ResponseEntity<List<Product>> searchProducts(
       @PathVariable("query") String query,
       @PathVariable("page") int page,
       @PathVariable("pageSize") int pageSize) {

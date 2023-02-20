@@ -1,7 +1,9 @@
 package de.htwberlin.port.product.controller;
 
-import de.htwberlin.core.appservice.dto.ProductDto;
+import de.htwberlin.core.appservice.mapper.IProductMapper;
+import de.htwberlin.core.domain.model.Product;
 import de.htwberlin.core.domain.service.IProductService;
+import de.htwberlin.port.dto.ProductDto;
 import de.htwberlin.port.exception.ProductNotFoundException;
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +19,10 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
   private final IProductService productService;
+  private final IProductMapper productMapper;
 
   @GetMapping
-  public ResponseEntity<List<ProductDto>> getProducts(@RequestParam Optional<Integer> amount) {
+  public ResponseEntity<List<Product>> getProducts(@RequestParam Optional<Integer> amount) {
     return amount
         .map(
             integer ->
@@ -29,7 +32,7 @@ public class ProductController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<ProductDto> getProductById(@PathVariable("id") UUID id)
+  public ResponseEntity<Product> getProductById(@PathVariable("id") UUID id)
       throws ProductNotFoundException {
     return new ResponseEntity<>(
         productService.findProductById(id).orElseThrow(ProductNotFoundException::new),
@@ -37,7 +40,7 @@ public class ProductController {
   }
 
   @GetMapping("/pkmn/{pokemonId}")
-  public ResponseEntity<ProductDto> getProductById(@PathVariable("pokemonId") String pokemonId)
+  public ResponseEntity<Product> getProductById(@PathVariable("pokemonId") String pokemonId)
       throws ProductNotFoundException {
     return new ResponseEntity<>(
         productService.findProductByPokemonId(pokemonId).orElseThrow(ProductNotFoundException::new),
@@ -45,13 +48,15 @@ public class ProductController {
   }
 
   @PostMapping("/new")
-  public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
-    return new ResponseEntity<>(productService.createProduct(productDto), HttpStatus.CREATED);
+  public ResponseEntity<Product> createProduct(@RequestBody ProductDto productDto) {
+    final Product product = productMapper.toEntity(productDto);
+    return new ResponseEntity<>(productService.createProduct(product), HttpStatus.CREATED);
   }
 
   @PutMapping("/{id}/edit")
-  public ResponseEntity<ProductDto> updateProduct(
+  public ResponseEntity<Product> updateProduct(
       @RequestBody ProductDto productDto, @PathVariable("id") UUID id) {
-    return new ResponseEntity<>(productService.updateProduct(productDto, id), HttpStatus.OK);
+    final Product product = productMapper.toEntity(productDto);
+    return new ResponseEntity<>(productService.updateProduct(product, id), HttpStatus.OK);
   }
 }

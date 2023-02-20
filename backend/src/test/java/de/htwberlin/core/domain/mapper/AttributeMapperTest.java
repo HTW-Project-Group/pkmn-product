@@ -2,16 +2,16 @@ package de.htwberlin.core.domain.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import de.htwberlin.core.appservice.dto.ProductDto;
-import de.htwberlin.core.appservice.dto.ProductFactory;
 import de.htwberlin.core.appservice.mapper.AttributeMapper;
+import de.htwberlin.core.domain.model.Product;
+import de.htwberlin.core.domain.model.ProductFactory;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class AttributeMapperTest {
 
-  private AttributeMapper<ProductDto> attributeMapper;
+  private AttributeMapper<Product> attributeMapper;
 
   @BeforeEach
   void setUp() {
@@ -42,7 +42,7 @@ class AttributeMapperTest {
             .condition(5)
             .price(55.5)
             .build();
-    var target = ProductDto.builder().id(null).condition(0).price(0.0).name("Charizard GX").build();
+    var target = Product.builder().id(null).condition(0).price(0.0).name("Charizard GX").build();
 
     // when
     var result = attributeMapper.copyAttributes(source, target);
@@ -57,7 +57,7 @@ class AttributeMapperTest {
   @Test
   void shouldReturnTargetObjectIfSourceIsNull() {
     // given
-    var target = ProductDto.builder().name("Charizard GX").build();
+    var target = Product.builder().name("Charizard GX").build();
 
     // when
     var result = attributeMapper.copyAttributes(null, target);

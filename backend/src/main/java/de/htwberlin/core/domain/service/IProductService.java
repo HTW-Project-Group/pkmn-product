@@ -1,21 +1,21 @@
 package de.htwberlin.core.domain.service;
 
-import de.htwberlin.core.appservice.dto.ProductDto;
+import de.htwberlin.core.domain.model.Product;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface IProductService {
 
-  List<ProductDto> findAllProducts();
+  List<Product> findAllProducts();
 
-  List<ProductDto> findCertainAmountOfProducts(int amount);
+  List<Product> findCertainAmountOfProducts(int amount);
 
-  Optional<ProductDto> findProductById(UUID id);
+  Optional<Product> findProductById(UUID id);
 
-  Optional<ProductDto> findProductByPokemonId(String id);
+  Optional<Product> findProductByPokemonId(String id);
 
-  ProductDto createProduct(ProductDto dto);
+  Product createProduct(Product product);
 
-  ProductDto updateProduct(ProductDto dto, UUID id);
+  Product updateProduct(Product product, UUID id);
 }

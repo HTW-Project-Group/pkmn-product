@@ -4,10 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 
-import de.htwberlin.core.appservice.dto.ProductDto;
-import de.htwberlin.core.appservice.dto.ProductFactory;
 import de.htwberlin.core.appservice.mapper.AttributeMapper;
-import de.htwberlin.core.appservice.mapper.IProductMapperImpl;
+import de.htwberlin.core.domain.model.Product;
+import de.htwberlin.core.domain.model.ProductFactory;
 import de.htwberlin.core.domain.model.SearchParam;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
 import de.htwberlin.core.domain.service.ISearchService;
@@ -26,21 +25,17 @@ class SearchServiceTest {
 
     @BeforeEach
     void setUp() {
-      var productMapper = new IProductMapperImpl();
-      var attributeMapper = new AttributeMapper<ProductDto>();
+      var attributeMapper = new AttributeMapper<Product>();
       var productRepository = new ProductInMemoryRepository();
 
       var products =
           List.of(
-              productMapper.toEntity(
-                  ProductFactory.simpleProduct().name("Pikachu").pokemonId("basep-1").build()),
-              productMapper.toEntity(
-                  ProductFactory.simpleProduct().name("Pikachu").pokemonId("basep-4").build()),
-              productMapper.toEntity(
-                  ProductFactory.simpleProduct().name("Charizard").pokemonId("base1-4").build()));
+              ProductFactory.simpleProduct().name("Pikachu").pokemonId("basep-1").build(),
+              ProductFactory.simpleProduct().name("Pikachu").pokemonId("basep-4").build(),
+              ProductFactory.simpleProduct().name("Charizard").pokemonId("base1-4").build());
       productRepository.saveAll(products);
 
-      var productService = new ProductService(productRepository, productMapper, attributeMapper);
+      var productService = new ProductService(productRepository, attributeMapper);
 
       var apiClient = new PokemonApiClient();
       var pokemonService = new PokemonService(apiClient);
@@ -59,7 +54,7 @@ class SearchServiceTest {
       // then
       assertThat(result).hasSize(2);
       assertThat(result)
-          .extracting(ProductDto::getPokemonId)
+          .extracting(Product::getPokemonId)
           .containsExactlyInAnyOrder("basep-1", "basep-4");
       assertThat(result.get(0).getName().toLowerCase()).contains("pikachu");
       assertThat(result.get(1).getName().toLowerCase()).contains("pikachu");
@@ -76,7 +71,7 @@ class SearchServiceTest {
       // then
       assertThat(result).hasSize(2);
       assertThat(result)
-          .extracting(ProductDto::getPokemonId)
+          .extracting(Product::getPokemonId)
           .containsExactlyInAnyOrder("basep-1", "basep-4");
       assertThat(result.get(0).getName().toLowerCase()).contains("pikachu");
       assertThat(result.get(1).getName().toLowerCase()).contains("pikachu");

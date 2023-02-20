@@ -6,10 +6,9 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import de.htwberlin.core.appservice.dto.ProductDto;
-import de.htwberlin.core.appservice.dto.ProductFactory;
 import de.htwberlin.core.appservice.mapper.AttributeMapper;
-import de.htwberlin.core.appservice.mapper.IProductMapperImpl;
+import de.htwberlin.core.domain.model.Product;
+import de.htwberlin.core.domain.model.ProductFactory;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
 import de.htwberlin.core.domain.service.IPokemonService;
@@ -41,10 +40,9 @@ class SearchControllerIntegrationTest {
   @BeforeEach
   void setUp() {
     // given
-    var productMapper = new IProductMapperImpl();
-    var attributeMapper = new AttributeMapper<ProductDto>();
+    var attributeMapper = new AttributeMapper<Product>();
     repository = new ProductInMemoryRepository();
-    productService = new ProductService(repository, productMapper, attributeMapper);
+    productService = new ProductService(repository, attributeMapper);
     pokemonService = new PokemonService(new PokemonApiClient());
     searchService = new SearchService(productService, pokemonService);
     controller = new SearchController(searchService);

@@ -2,12 +2,9 @@ package de.htwberlin.core.domain.service.impl;
 
 import static org.assertj.core.api.Assertions.*;
 
-import de.htwberlin.core.appservice.dto.ProductDto;
-import de.htwberlin.core.appservice.dto.ProductFactory;
 import de.htwberlin.core.appservice.mapper.AttributeMapper;
-import de.htwberlin.core.appservice.mapper.IProductMapper;
-import de.htwberlin.core.appservice.mapper.IProductMapperImpl;
 import de.htwberlin.core.domain.model.Product;
+import de.htwberlin.core.domain.model.ProductFactory;
 import de.htwberlin.core.domain.repository.IProductRepository;
 import de.htwberlin.core.domain.repository.ProductInMemoryRepository;
 import de.htwberlin.core.domain.service.IProductService;
@@ -20,15 +17,13 @@ class ProductServiceTest {
 
   private IProductService productService;
   private IProductRepository productRepository;
-  private IProductMapper productMapper;
 
   @BeforeEach
   void setUp() {
     productRepository = new ProductInMemoryRepository();
-    productMapper = new IProductMapperImpl();
-    var attributeMapper = new AttributeMapper<ProductDto>();
+    var attributeMapper = new AttributeMapper<Product>();
 
-    productService = new ProductService(productRepository, productMapper, attributeMapper);
+    productService = new ProductService(productRepository, attributeMapper);
   }
 
   @Test
@@ -37,10 +32,9 @@ class ProductServiceTest {
     final UUID id1 = UUID.fromString("10000000-0000-0000-0000-000000000000");
     final UUID id2 = UUID.fromString("20000000-0000-0000-0000-000000000000");
     final List<Product> products =
-        productMapper.toEntities(
-            List.of(
-                ProductFactory.simpleProduct().id(id1).build(),
-                ProductFactory.simpleProduct().id(id2).build()));
+        List.of(
+            ProductFactory.simpleProduct().id(id1).build(),
+            ProductFactory.simpleProduct().id(id2).build());
     productRepository.saveAll(products);
 
     // when
@@ -48,16 +42,15 @@ class ProductServiceTest {
 
     // then
     assertThat(result).hasSize(2);
-    assertThat(result).extracting(ProductDto::getId).containsExactlyInAnyOrder(id1, id2);
+    assertThat(result).extracting(Product::getId).containsExactlyInAnyOrder(id1, id2);
   }
 
   @Test
   void shouldReturnProductById() {
     // given
     final UUID targetId = UUID.fromString("00000000-0000-0000-0000-000000000000");
-    final ProductDto targetDto =
+    final Product targetEntity =
         ProductFactory.simpleProduct().id(targetId).name("Test").price(199).build();
-    final Product targetEntity = productMapper.toEntity(targetDto);
     productRepository.save(targetEntity);
 
     // when
@@ -75,9 +68,8 @@ class ProductServiceTest {
   void shouldReturnProductByPokemondId() {
     // given
     final String targetPokemonId = "test-pkmn";
-    final ProductDto targetDto =
+    final Product targetEntity =
         ProductFactory.simpleProduct().pokemonId(targetPokemonId).name("Test").price(199).build();
-    final Product targetEntity = productMapper.toEntity(targetDto);
     productRepository.save(targetEntity);
 
     // when
