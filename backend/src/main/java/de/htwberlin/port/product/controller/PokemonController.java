@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/pokemon")
-@CrossOrigin
 public class PokemonController {
 
   private final IPokemonService pokemonService;

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/search")
-@CrossOrigin(origins = "http://localhost:3000")
 public class SearchController {
 
   private final ISearchService searchService;
