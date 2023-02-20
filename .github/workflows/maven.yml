@@ -53,15 +53,16 @@ jobs:
           cd backend
           mvn -B package --file pom.xml -DskipTests -ntp
           cd ..
-          mkdir -p deployment/product
-          cp backend/target/*.jar deployment/product/
+          mkdir -p api-gateway/deployment/product
+          cp backend/target/*.jar api-gateway/deployment/product/
       - name: Deploy to Api Gateway
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
         env:
           SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_KEY }}
+          TMPDIR: api-gateway/
         with:
-          source-directory: deployment/product/
+          source-directory: api-gateway/
           destination-github-username: 'HTW-Project-Group'
           destination-repository-name: 'pkmn-api-gateway'
           user-email: deploy@github.com
