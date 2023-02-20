@@ -69,7 +69,6 @@ jobs:
         uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
         env:
           SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_KEY }}
-          TMPDIR: api-gateway/
         with:
           source-directory: api-gateway/
           destination-github-username: 'HTW-Project-Group'
