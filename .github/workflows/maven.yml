@@ -62,7 +62,7 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_KEY }}
         with:
           source-directory: deployment/product/
-          destination-github-username: 'deploy'
+          destination-github-username: 'HTW-Project-Group'
           destination-repository-name: 'pkmn-api-gateway'
           user-email: deploy@github.com
           commit-message: Deployed from $GITHUB_REF
