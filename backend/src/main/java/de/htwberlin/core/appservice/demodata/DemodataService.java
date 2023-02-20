@@ -20,7 +20,19 @@ public class DemodataService implements IDemodataService {
   }
 
   private void generateProducts(int count) {
-    for (int c = 1; c <= count; c++) {
+    final int existingProducts = productService.findAllProducts().size();
+
+    if (existingProducts >= count) {
+      log.info("Database already contains " + count + " Data Records");
+      log.info("No Testdata will be created");
+      return;
+    }
+    if (existingProducts != 0) {
+      log.info("Database already contains " + existingProducts + " Data Records");
+      log.info("Generating only " + (count - existingProducts));
+    }
+
+    for (int c = existingProducts + 1; c <= count; c++) {
       var product = ProductFactory.simpleProduct().build();
       if (productService.findProductByPokemonId(product.getPokemonId()).isEmpty()) {
         productService.createProduct(product);
