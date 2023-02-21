@@ -111,6 +111,7 @@ export default function CheckoutView() {
             options={{ "client-id": "test", currency: "EUR" }}
           >
             <PayPalButtons
+              key={`${orderSum}EUR`}
               style={{ layout: "horizontal" }}
               createOrder={(data, actions) => {
                 return actions.order.create({
