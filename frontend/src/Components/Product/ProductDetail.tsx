@@ -38,6 +38,7 @@ export default function ProductDetails({
         artist: jsonData.artist,
         rarity: jsonData.rarity,
       };
+      window.scrollTo(0,0);
       return pokemon;
     };
     pokemonDetails().then((result) => setPokemon(result));
