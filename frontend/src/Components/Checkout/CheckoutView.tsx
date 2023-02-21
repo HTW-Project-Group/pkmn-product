@@ -7,7 +7,6 @@ import CheckoutItem from "../../Model/CheckoutItem";
 import KeycloakHandler from "../../Helper/KeycloakHandler";
 import { useKeycloak } from "@react-keycloak/web";
 import { formatPrice } from "../../Helper/Format";
-import ProductDto from "../../Model/ProductDto";
 
 export default function CheckoutView() {
   const [credentialsApproved, setCredentialsApproved] = useState(false);
@@ -15,6 +14,7 @@ export default function CheckoutView() {
 
   const { keycloak } = useKeycloak();
   const [checkoutItems, setCheckoutItems] = useState([] as CheckoutItem[]);
+  const [orderSum, setOrderSum] = useState(0);
 
   useEffect(() => {
     const getCheckout = async (userId) => {
@@ -33,9 +33,14 @@ export default function CheckoutView() {
         keycloak.loadUserInfo().then((userResponse: any) => {
           console.log(userResponse);
 
-          getCheckout(userResponse.sub).then((checkoutItems) =>
-            setCheckoutItems(checkoutItems)
-          );
+          getCheckout(userResponse.sub).then((checkoutItems) => {
+            setCheckoutItems(checkoutItems);
+            setOrderSum(
+              checkoutItems
+                .map((v) => v.price * v.quantity)
+                .reduce((a, b) => a + b) + 50
+            );
+          });
         });
       })
       .catch((error) => console.error(error));
@@ -67,15 +72,7 @@ export default function CheckoutView() {
             </tr>
             <tr className="total">
               <td>Order total</td>
-              <td>
-                {formatPrice(
-                  checkoutItems.length != 0
-                    ? checkoutItems
-                        .map((v) => v.price * v.quantity)
-                        .reduce((a, b) => a + b) + 50
-                    : 0
-                )}
-              </td>
+              <td>{formatPrice(orderSum)}</td>
             </tr>
           </tbody>
         </table>
@@ -120,7 +117,9 @@ export default function CheckoutView() {
                   purchase_units: [
                     {
                       amount: {
-                        value: "1474.99",
+                        value: (Math.round(orderSum * 100) / 100)
+                          .toFixed(2)
+                          .toString(),
                       },
                     },
                   ],
