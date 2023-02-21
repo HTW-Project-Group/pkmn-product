@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/product")
 public class ProductController {
 
+  // Approved by Tobi
+
   private final IProductService productService;
   private final IProductMapper productMapper;
 
