@@ -1,12 +1,45 @@
 import * as React from "react";
 import { Box, Button, Divider, TextField } from "@mui/material";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CheckoutItem from "../../Model/CheckoutItem";
+import KeycloakHandler from "../../Helper/KeycloakHandler";
+import { useKeycloak } from "@react-keycloak/web";
+import { formatPrice } from "../../Helper/Format";
+import ProductDto from "../../Model/ProductDto";
 
 export default function CheckoutView() {
   const [credentialsApproved, setCredentialsApproved] = useState(false);
   const navigate = useNavigate();
+
+  const { keycloak } = useKeycloak();
+  const [checkoutItems, setCheckoutItems] = useState([] as CheckoutItem[]);
+
+  useEffect(() => {
+    const getCheckout = async (userId) => {
+      const data = await fetch(
+        `http://localhost:8080/v1/checkout/user/${userId}`,
+        {
+          method: "GET",
+        }
+      );
+      return data.json();
+    };
+
+    KeycloakHandler.instance()
+      .onKeycloakLoaded()
+      .then(() => {
+        keycloak.loadUserInfo().then((userResponse: any) => {
+          console.log(userResponse);
+
+          getCheckout(userResponse.sub).then((checkoutItems) =>
+            setCheckoutItems(checkoutItems)
+          );
+        });
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <div className="checkout-wrapper">
@@ -15,18 +48,36 @@ export default function CheckoutView() {
         <h2>Order Summary</h2>
         <Divider />
         <table className="order-summary">
-          <tr>
-            <td>Items</td>
-            <td>1424,99 €</td>
-          </tr>
-          <tr>
-            <td>Shipping</td>
-            <td>50,00 €</td>
-          </tr>
-          <tr className="total">
-            <td>Order total</td>
-            <td>1474,99 €</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>Items</td>
+              <td>
+                {formatPrice(
+                  checkoutItems.length != 0
+                    ? checkoutItems
+                        .map((v) => v.price * v.quantity)
+                        .reduce((a, b) => a + b)
+                    : 0
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td>Shipping</td>
+              <td>50,00 €</td>
+            </tr>
+            <tr className="total">
+              <td>Order total</td>
+              <td>
+                {formatPrice(
+                  checkoutItems.length != 0
+                    ? checkoutItems
+                        .map((v) => v.price * v.quantity)
+                        .reduce((a, b) => a + b) + 50
+                    : 0
+                )}
+              </td>
+            </tr>
+          </tbody>
         </table>
 
         <h2>Adress</h2>

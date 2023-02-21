@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import KeycloakHandler from "../../Helper/KeycloakHandler";
 import Basket from "../../Model/Basket";
 import { formatPrice } from "../../Helper/Format";
+import ProductDto from "../../Model/ProductDto";
+import CheckoutItem from "../../Model/CheckoutItem";
 
 export default function BasketView() {
   const navigate = useNavigate();
@@ -37,6 +39,18 @@ export default function BasketView() {
       .catch((error) => console.error(error));
   }, []);
 
+  const checkout = () => {
+    const checkoutItems = basket.items.map((v) => v as CheckoutItem);
+    return fetch(`http://localhost:8080/v1/basket/queue/checkout/add`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(checkoutItems),
+    });
+  };
+
   const onBasketUpdate = (basket: Basket) => {
     setBasket(basket);
   };
@@ -62,7 +76,13 @@ export default function BasketView() {
                 .reduce((a, b) => a + b)
             )}
           </span>
-          <Button variant="contained" onClick={() => navigate("/checkout")}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              checkout();
+              navigate("/checkout");
+            }}
+          >
             Checkout
           </Button>
         </div>
